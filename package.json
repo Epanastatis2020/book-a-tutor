@@ -1,0 +1,38 @@
+{
+  "name": "book-a-tutor",
+  "version": "1.0.0",
+  "description": "This app allows teachers and tutors to book sessions with students and keep track of their commitments and learning. Students can log in and view any sessions that have been scheduled with them.",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run lint",
+    "start": "node server.js",
+    "lint": "eslint --quiet .",
+    "fix": "eslint --fix .",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Epanastatis2020/book-a-tutor.git"
+  },
+  "keywords": [],
+  "authors": "Con, Elahe, Luke & Sarah",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-standard": "^16.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "prettier": "^2.1.2"
+  }
+}
