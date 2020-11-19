@@ -1,9 +1,9 @@
 // Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs')
 
 // Creating the Tutor model
 module.exports = function (sequelize, DataTypes) {
-  const Tutor = sequelize.define("Tutor", {
+  const Tutor = sequelize.define('Tutor', {
     // The email cannot be null, and must be a proper email before creation
     firstName: {
       type: DataTypes.STRING,
@@ -32,33 +32,33 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     }
-  });
+  })
 
   Tutor.associate = function (models) {
     // Associating Tutor with TutorSubjects
     // When an Tutor is deleted, also delete any associated TutorSubjects
     Tutor.hasMany(models.TutorSubject, {
-      onDelete: "cascade"
-    });
+      onDelete: 'cascade'
+    })
     // Associating Tutor with Bookings
     // When an Tutor is deleted, also delete any associated Bookings
     Tutor.hasMany(models.Booking, {
-      onDelete: "cascade"
-    });
-  };
+      onDelete: 'cascade'
+    })
+  }
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   Tutor.prototype.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.password);
-  };
+    return bcrypt.compareSync(password, this.password)
+  }
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
-  Tutor.addHook("beforeCreate", user => {
+  Tutor.addHook('beforeCreate', user => {
     user.password = bcrypt.hashSync(
       user.password,
       bcrypt.genSaltSync(10),
       null
-    );
-  });
-  return Tutor;
-};
+    )
+  })
+  return Tutor
+}
