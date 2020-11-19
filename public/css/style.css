@@ -4,7 +4,7 @@
 }
 
 html, body {
-    background-image: url("background_still.jpg");
+    background-image: url("/public/img/background_still.jpg");
     background-size: cover;
     background-color: rgb(146, 141, 141);
     margin: 0;
