@@ -17,12 +17,14 @@ module.exports = function (sequelize, DataTypes) {
   Booking.associate = function (models) {
     // A Booking can't be created without a Student, Tutor or Subject due to the foreign key constraints
     Booking.belongsTo(models.User, {
+      as: 'student',
       foreignKey: {
         allowNull: false,
         name: 'StudentId'
       }
     })
     Booking.belongsTo(models.User, {
+      as: 'tutor',
       foreignKey: {
         allowNull: false,
         name: 'TutorId'
