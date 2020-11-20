@@ -44,7 +44,7 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: 'StudentId',
       onDelete: 'cascade'
     });
-    
+
     User.hasMany(models.Booking, {
       foreignKey: 'TutorId',
       onDelete: 'cascade'
