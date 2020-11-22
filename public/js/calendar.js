@@ -119,4 +119,75 @@ document.addEventListener('DOMContentLoaded', function () {
     $(window).load(function () {
         calendar.render();
     });
+
+    //------------------------------------------------
+    // Calendar modals
+    //------------------------------------------------
+
+    $(document).ready(function () {
+        //------------------------------------------------
+        // Update/edit event calendar modal
+        //------------------------------------------------
+        var savebtn = document.getElementById('editModalSave');
+        savebtn.addEventListener('click', updateCalendar);
+
+        function updateCalendar() {
+            let tutorName = tutorNameReference; // to replace with actual tutor name path
+            let tutorID = tutorIDReference; // to replace with actual tutor ID path
+            // start date converted to UTC
+            let startDt = new Date($('#startdt').val()).toUTCString();
+            // end date converted to UTC
+            let endDt = new Date($('#enddt').val()).toUTCString();
+
+            // error handling for if the start day/time is after the end day/time
+            if (startDt >= endDt) {
+                $('#modalErrorText').attr('class', 'show'); //modal to be created
+                return;
+            } else {
+                $('#modalErrorText').attr('class', 'hide');
+            }
+
+            $('#calendarModal').modal('hide'); //modal to be created
+
+            var updatedEvent = {
+                title: tutorName,
+                notes: $('#notes').val(),
+                start: startDt,
+                end: endDt,
+                tutorID: tutorID,
+                id: $('#calendarID').text(),
+            };
+
+            $.ajax({
+                url: '#', // to be updated once endpoints finalised
+                type: 'PUT',
+                data: updatedEvent,
+                success: function () {
+                    calendar.refetchEvents(); //re-retrieves the calendar
+                },
+            });
+        }
+        //end update/edit event calendar modal
+
+        //------------------------------------------------
+        // Delete event calendar modal
+        //------------------------------------------------
+        var deleteBtn = document.getElementById('deleteEvent');
+        deleteBtn.addEventListener('click', deleteEvent);
+
+        function deleteEvent() {
+            $('#calendarModal').modal('hide');
+
+            const id = $('#calendarID').text();
+
+            $.ajax({
+                url: '#' + id, // to be updated once endpoints finalised
+                type: 'DELETE',
+                success: function () {
+                    calendar.refetchEvents(); //re-retrieves the calendar
+                },
+            });
+        }
+        // end delete event calendar modal
+    });
 });
