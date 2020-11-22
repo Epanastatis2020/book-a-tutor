@@ -1,13 +1,18 @@
 module.exports = function (sequelize, DataTypes) {
-    const Subject = sequelize.define('Subject', {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1],
+    const Subject = sequelize.define(
+        'Subject',
+        {
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: { len: [1] },
             },
         },
-    });
+        // don't need timestamps on this table
+        {
+            timestamps: false,
+        }
+    );
 
     Subject.associate = function (models) {
         // Associating Subject with TutorSubjects

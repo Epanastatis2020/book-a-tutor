@@ -4,13 +4,15 @@ module.exports = {
         sourceType: 'module',
     },
     env: {
+        browser: true,
+        jquery: true,
         es6: true,
         commonjs: true,
         node: true,
         jest: true,
     },
-    plugins: ['prettier'],
-    extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+    plugins: ['prettier', 'jquery'],
+    extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:jquery/deprecated'],
     rules: {
         indent: ['warn', 4],
     },

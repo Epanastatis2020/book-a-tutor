@@ -10,28 +10,28 @@ $(document).ready(() => {
         event.preventDefault();
         console.log(`UserType: ${userTypeInput.val()}`);
         const userData = {
+            // TODO: add firstName, lastName
+            firstName: 'Me',
+            lastName: 'Myself',
             email: emailInput.val().trim(),
             password: passwordInput.val().trim(),
-            isTutor: userTypeInput.val() !== 'student',
+            userType: userTypeInput.val(),
         };
 
+        // TODO: check firstName, lastName
         if (!userData.email || !userData.password) {
             return;
         }
         // If we have an email and password, run the signUpUser function
-        signUpUser(userData.email, userData.password, userData.isTutor);
+        signUpUser(userData);
         emailInput.val('');
         passwordInput.val('');
     });
 
     // Does a post to the signup route. If successful, we are redirected to the members page
     // Otherwise we log any errors
-    function signUpUser(email, password, isTutor) {
-        $.post('/api/signup', {
-            email: email,
-            password: password,
-            isTutor: isTutor,
-        })
+    function signUpUser(user) {
+        $.post('/api/signup', user)
             .then(() => {
                 window.location.replace('/members');
                 // If there's an error, handle it by throwing up a bootstrap alert
