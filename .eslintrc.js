@@ -11,9 +11,10 @@ module.exports = {
         node: true,
         jest: true,
     },
-    plugins: ['prettier', 'jquery'],
-    extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:jquery/deprecated'],
+    plugins: ['prettier', 'dollar-sign'],
+    extends: ['eslint:recommended', 'plugin:prettier/recommended'],
     rules: {
         indent: ['warn', 4],
+        'dollar-sign/dollar-sign': [2, 'ignoreProperties'],
     },
 };
