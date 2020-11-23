@@ -12,6 +12,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        videoLink: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        }
     });
 
     Booking.associate = function (models) {
@@ -23,6 +27,7 @@ module.exports = function (sequelize, DataTypes) {
                 name: 'StudentId',
             },
         });
+
         Booking.belongsTo(models.User, {
             as: 'tutor',
             foreignKey: {
@@ -30,6 +35,7 @@ module.exports = function (sequelize, DataTypes) {
                 name: 'TutorId',
             },
         });
+
         Booking.belongsTo(models.Subject, {
             foreignKey: {
                 allowNull: false,
