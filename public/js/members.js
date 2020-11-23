@@ -6,12 +6,12 @@ $(document).ready(() => {
     });
 
     // TODO: get the bookings for a student (using current logged in userId. Have to work out how to get this)
-    $.get(`/api/studentbookings/${userId}`).then((data) => {
-        // TODO: fill the page/calendar with the booking data
-    });
+    // $.get(`/api/studentbookings/2`).then((data) => {
+    //     TODO: fill the page/calendar with the booking data
+    // });
 
     // TODO: get the bookings for a tutor (using current logged in userId. Have to work out how to get this)
-    $.get(`/api/tutorbookings/${userId}`).then((data) => {
-        // TODO: fill the page/calendar with the booking data
-    });
+    // $.get(`/api/tutorbookings/1`).then((data) => {
+    //     TODO: fill the page/calendar with the booking data
+    // });
 });

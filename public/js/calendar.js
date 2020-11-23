@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
         eventLimit: true,
 
         events: {
-            //retrieving all events from db
-            url: '#', // to be updated once endpoints finalised
+            //retrieving all events from db for the current user
+            url: `/api/bookings/'${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`, // to be updated once endpoints finalised
             method: 'GET',
             failure: function () {
                 alert('there was an error while fetching calendar events');
