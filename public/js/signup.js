@@ -1,6 +1,8 @@
 $(document).ready(() => {
     // Getting references to our form and input
     const signUpForm = $('form.signup');
+    const firstNameInput = $('input#firstname-input');
+    const lastNameInput = $('input#lastname-input');
     const emailInput = $('input#email-input');
     const passwordInput = $('input#password-input');
     const userTypeInput = $('select#userType-input');
@@ -10,20 +12,20 @@ $(document).ready(() => {
         event.preventDefault();
         console.log(`UserType: ${userTypeInput.val()}`);
         const userData = {
-            // TODO: add firstName, lastName
-            firstName: 'Me',
-            lastName: 'Myself',
+            firstName: firstNameInput.val().trim(),
+            lastName: lastNameInput.cal().trim(),
             email: emailInput.val().trim(),
             password: passwordInput.val().trim(),
             userType: userTypeInput.val(),
         };
 
-        // TODO: check firstName, lastName
-        if (!userData.email || !userData.password) {
+        if (!userData.firstName || !userData.lastName || !userData.email || !userData.password) {
             return;
         }
         // If we have an email and password, run the signUpUser function
         signUpUser(userData);
+        firstNameInput.val('');
+        lastNameInput.val('');
         emailInput.val('');
         passwordInput.val('');
     });
