@@ -48,8 +48,11 @@ module.exports = function (app) {
   app.post('/api/login', passport.authenticate('local'), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
-      email: req.user.email,
       id: req.user.id,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email,
+      userType: req.user.userType
     });
   });
 
@@ -87,7 +90,13 @@ module.exports = function (app) {
     } else {
       // Otherwise send back the user's email and id
       db.User.findByPk(req.user.id).then((dbUser) => {
-        res.status(200).json(dbUser);
+        res.status(200).json({
+          id: dbUser.id,
+          firstName: dbUser.firstName,
+          lastName: dbUser.lastName,
+          email: dbUser.email,
+          userType: dbUser.userType,
+        });
       });
     }
   });
