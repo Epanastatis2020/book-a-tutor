@@ -1,54 +1,112 @@
-
 {{!-- the first page --}}
-      <header class="header">
-        <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="./signup.handlebars">Signup</a>
-            {{!-- will add the page --}}
-            <a href="#contact">Contact</a>
-            <div class="login-container">
-              <form action="/action_page.php">
-                <button class="login-container" type="submit">Login</button>
-                <input type="email" class="login-container" placeholder="Enter email" name="email" id="email-input" aria-describedby="emailHelp">
-                <input type="password" class="login-container" placeholder="Password" name="psw" id="password-input">
-              </form>
-            </div>
-          </div>
-    </header>
+<header class="header">
+  <div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="./signup.handlebars">Signup</a>
+    {{!-- will add the Contact page --}}
+    <a href="#contact">Contact</a>
+    <div class="login-container">
+      <form action="/action_page.php">
+        <button class="login-container" type="submit">Login</button>
+        <input type="email" class="login-container" placeholder="Enter email" name="email" id="email-input"
+          aria-describedby="emailHelp">
+        <input type="password" class="login-container" placeholder="Password" name="psw" id="password-input">
+      </form>
+    </div>
+  </div>
+</header>
 
-
-    <div class="col-md-12">
-    <div class="center-card">
-        <div class="head-card">
-            <h1 class= "h1">BOOK A TUTOR</h1>
-            <p class="head-p">book your own private tutor | subject-specific online tutoring | search and book online</p>
-            <hr>
-        </div>
+<div class="col-md-12">
+  <div class="center-card">
+    <div class="head-card">
+      <h1 class="h1">BOOK A TUTOR</h1>
+      <p class="head-p">book your own private tutor | subject-specific online tutoring | search and book online</p>
+      <hr>
+    </div>
     <p1>The academic segment of the e-learning market is expected to be valued at over $157.7 billion globally by 2025.
-        This growing popularity can be attributed to the various benefits of e-learning for learners as well as educators.
-         Students can learn at their own pace, and educators can adapt their teaching methods to the learning styles of 
-         students. That’s a win-win for everyone!
-         If you have a tutoring business, prepare to take it online if you haven’t already!</p1>
-     <br>
-     <br>
-    <p2> This app allows tutor to provide a blended and flexible learning experience to their students. 
-         also students can have the access to their courses timetable.
-         By signing up for free you can have an access as a tutor or student and be updated.
+      This growing popularity can be attributed to the various benefits of e-learning for learners as well as educators.
+      Students can learn at their own pace, and educators can adapt their teaching methods to the learning styles of
+      students. That’s a win-win for everyone!
+      If you have a tutoring business, prepare to take it online if you haven’t already!</p1>
+    <br>
+    <br>
+    <p2> This app allows tutor to provide a blended and flexible learning experience to their students.
+      also students can have the access to their courses timetable.
+      By signing up for free you can have an access as a tutor or student and be updated.
     </p2>
   </div>
 </div>
 {{!-- end of first page --}}
 
-<header class="header">
-  <h1 class="h1">BOOK A TUTOR
-     <button class="navbar-brand" href="./layouts/main.handlebars" style="float:right; margin: 20PX;">Logout</button>
-  </h1>
-  <p class="head-p">book your own private tutor | subject-specific online tutoring | search and book online</p>
-  <hr>
-</header>
-{{!-- the calander --}}
-<div class="col-sm-6" style="float:left">
-  <div class="left-side-card">
-    <div id='calendarDiv'></div>
+<!-- LOGIN Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Make a Booking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Subject</label>
+            <select class="form-control" id="subjectDropdown">
+              {{#each subject}}
+              <option>{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Tutor</label>
+            <select class="form-control" id="tutorDropdown">
+              {{#each user}}
+              {{#if tutor}}
+              <option>
+                {{user.firstName}} {{user.lastName}}
+              </option>
+              {{/if}}
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Start Time</label>
+            <select class="form-control" id="startTime">
+              {{#each booking}}
+              <option>
+                {{startTime}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">End Time</label>
+            <select class="form-control" id="endTime">
+              {{#each booking}}
+              <option>
+                {{endTime}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div>
+            <p>Link to your online tutoring sessions with {{firstName}}{{lastName}} <a
+                href="{{videoLink}}"><small>www.bookatutorvideo.com/987654</small></a></p>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Notes:</label>
+            <textarea class="form-control" id="topicInput" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Add SIGNUP Modal here -->
