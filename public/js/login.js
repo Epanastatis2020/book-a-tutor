@@ -30,18 +30,18 @@ $(document).ready(() => {
             email: email,
             password: password,
         })
-        .then((userData) => {
-            // save the curent user details to session storage
-            sessionStorage.setItem('userId', userData.id);
-            sessionStorage.setItem('userEmail', userData.email);
-            sessionStorage.setItem('userFirstName', userData.firstName);
-            sessionStorage.setItem('userLastName', userData.lastName);
-            sessionStorage.setItem('userType', userData.userType);
-            window.location.replace('/members');
-            // If there's an error, log the error
-        })
-        .fail((err) => {
-            console.log(err);
-        });
+            .then((userData) => {
+                // save the curent user details to session storage
+                sessionStorage.setItem('userId', userData.id);
+                sessionStorage.setItem('userEmail', userData.email);
+                sessionStorage.setItem('userFirstName', userData.firstName);
+                sessionStorage.setItem('userLastName', userData.lastName);
+                sessionStorage.setItem('userType', userData.userType);
+                window.location.replace('/members');
+                // If there's an error, log the error
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 });
