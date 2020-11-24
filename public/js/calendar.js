@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         events: {
             //retrieving all events from db for the current user
-            url: `/api/bookings/'${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
+            url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
             method: 'GET',
             failure: function () {
                 alert('there was an error while fetching calendar events');
@@ -83,11 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            $.ajax({
-                url: `/api/bookings/${updatedEvent.id}`,
-                type: 'PUT',
-                data: updatedEvent,
-            });
+            this.updateEvent(updatedEvent)
         },
 
         //when an existing event is dragged and dropped
@@ -100,12 +96,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
+            this.updateEvent(updatedEvent)
+        },
+
+        //method providing ajax call for updating event
+        updateEvent: function (updatedEvent) {
             $.ajax({
                 url: `/api/bookings/${updatedEvent.id}`,
                 type: 'PUT',
                 data: updatedEvent,
             });
-        },
+        };
     });
 
     //------------------------------------------------
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             $.ajax({
-                url: '#', // to be updated once endpoints finalised
+                url: `/api/bookings/${updatedEvent.id}`,
                 type: 'PUT',
                 data: updatedEvent,
                 success: function () {
@@ -177,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const id = $('#calendarID').text();
 
             $.ajax({
-                url: '#' + id, // to be updated once endpoints finalised
+                url: `/api/bookings/${id}`,
                 type: 'DELETE',
                 success: function () {
                     calendar.refetchEvents(); //re-retrieves the calendar
