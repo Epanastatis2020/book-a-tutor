@@ -11,7 +11,6 @@ const dayjs = require('dayjs');
 //------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', function () {
-
     //build calendar and methods
     var calendarDiv = document.getElementById('calendar');
 
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //defaultDate: '2020-11-22', went for international standard date notation to avoid confusion for different locales
         defaultDate: dayjs().format('YYYY/MM/DD'),
-        // defaultDate: new Date().toLocaleString(),
 
         // can click day/week names to navigate views
         navLinks: true,
