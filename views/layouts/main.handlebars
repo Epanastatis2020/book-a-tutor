@@ -11,21 +11,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    {{!-- links to fullcalendar CDN  --}}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.css"></script>
+    {{!--cdns here https://cdnjs.com/libraries/fullcalendar --> --}}
+    {{!-- full calendar css --> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css">
+    {{!-- if necessary, fullcalendar libs can be downloaded.  Put packages folder in /public to put hard copies of files--> --}}
+    <link href='packages/core/main.css' rel='stylesheet' />
+    <link href='packages/daygrid/main.css' rel='stylesheet' />
+    <script src='packages/core/main.js'></script>
+    <script src='packages/interaction/main.js'></script>
+    <script src='packages/daygrid/main.js'></script>
+    {{!-- links to dayjs CDN and script  --}}
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script>dayjs().format()</script>
     {{!-- the main CSS --}}
-    <link rel="stylesheet" href="/public/css/style.css" type="text/css" />
-    <!-- the link and CSS for fullcalendar -->
-    <link href='fullcalendar/main.css' rel='stylesheet' />
-    <script src='fullcalendar/main.js'></script>
+    <link rel="stylesheet" href="/css/style.css" type="text/css" />
     {{!-- the JavaScripts --}}
-    <script src="/public/js/calendar.js" defer></script>
-    <script src="/public/js/login.js" defer></script>
-    <script src="/public/js/signup.js" defer></script>
-    <script src="/public/js/members.js" defer></script>
+    <script src="/js/calendar.js" defer></script>
+    <script src="/js/login.js" defer></script>
+    <script src="/js/signup.js" defer></script>
+    <script src="/js/members.js" defer></script>
     {{!-- the background img --}}
-    <link rel="icon" type="image/ico" href="/public/img/brain-icon.png" alt="brain-logo" />
+    <link rel="icon" type="image/ico" href="/img/brain-icon.png" alt="brain-logo" />
 
     <title>BOOK A TUTOR</title>
 </head>
