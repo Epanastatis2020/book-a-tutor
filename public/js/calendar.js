@@ -1,10 +1,6 @@
 /* eslint-disable jquery/no-load */
 /* eslint-disable jquery/no-ajax */
 /* eslint-disable jquery/no-ready */
-//------------------------------------------------
-// Setting dependencies
-//------------------------------------------------
-const dayjs = require('dayjs');
 
 //------------------------------------------------
 // Initialising the calendar
@@ -12,7 +8,7 @@ const dayjs = require('dayjs');
 
 document.addEventListener('DOMContentLoaded', function () {
     //build calendar and methods
-    var calendarDiv = document.getElementById('calendar');
+    var calendarDiv = document.getElementById('calendarDiv');
 
     var calendar = new FullCalendar.Calendar(calendarDiv, {
         // Interaction plugin required to detect dateClick actions, selectable actions, and event drag-n-drop/resizing while
@@ -43,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         events: {
             //retrieving all events from db for the current user
-            url: `/api/bookings/'${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`, // to be updated once endpoints finalised
+            url: `/api/bookings/'${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
             method: 'GET',
             failure: function () {
                 alert('there was an error while fetching calendar events');
