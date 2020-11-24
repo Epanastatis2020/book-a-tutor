@@ -5,7 +5,7 @@ $(document).ready(() => {
         $('.member-name').text(data.email);
     });
 
-    $(document).on('click', '.btnLogout', function(event) {
+    $(document).on('click', '.btnLogout', function (event) {
         $.get('/logout').then(() => {
             // clear session storage
             sessionStorage.removeItem('userId');
@@ -13,7 +13,7 @@ $(document).ready(() => {
             sessionStorage.removeItem('userFirstName');
             sessionStorage.removeItem('userLastName');
             sessionStorage.removeItem('userType');
-           
+
             // and go to main page
             window.location.replace('/');
         });

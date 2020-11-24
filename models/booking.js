@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
         videoLink: {
             type: DataTypes.STRING,
             allowNull: true,
-        }
+        },
     });
 
     Booking.associate = function (models) {
