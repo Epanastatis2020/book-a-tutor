@@ -11,7 +11,6 @@ module.exports = function (app) {
             res.render('calendar');
         }
         return res.render('index');
-        // res.sendFile(path.join(__dirname, '../public/signup.html'));
     });
 
     app.get('/login', (req, res) => {
@@ -26,6 +25,5 @@ module.exports = function (app) {
     // If a user who is not logged in tries to access this route they will be redirected to the signup page
     app.get('/members', isAuthenticated, (req, res) => {
         res.render('calendar');
-        // res.sendFile(path.join(__dirname, '../public/members.html'));
     });
 };
