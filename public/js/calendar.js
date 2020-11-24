@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             $.ajax({
-                url: '#', // to be updated once endpoints finalised
+                url: `/api/bookings/${updatedEvent.id}`,
                 type: 'PUT',
                 data: updatedEvent,
             });
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             $.ajax({
-                url: '#', // to be updated once endpoints finalised
+                url: `/api/bookings/${updatedEvent.id}`,
                 type: 'PUT',
                 data: updatedEvent,
             });
