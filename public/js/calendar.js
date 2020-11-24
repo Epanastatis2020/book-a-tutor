@@ -11,21 +11,6 @@ const dayjs = require('dayjs');
 //------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', function () {
-    
-    $(document).on('click', '.btnLogout', function(event) {
-        $.get('/logout').then(() => {
-            // clear session storage
-            sessionStorage.removeItem('userId');
-            sessionStorage.removeItem('userEmail');
-            sessionStorage.removeItem('userFirstName');
-            sessionStorage.removeItem('userLastName');
-            sessionStorage.removeItem('userType');
-           
-            // and go to main page
-            window.location.replace('/');
-        });
-    });
-
 
     //build calendar and methods
     var calendarDiv = document.getElementById('calendar');
