@@ -126,7 +126,7 @@ module.exports = function (app) {
     });
 
     // PUT route for updating bookings. Get the updated Booking data from req.body
-    app.put('/api/bookings/:id', function (req, res) {
+    app.put('/api/bookings/', function (req, res) {
         db.Booking.update(
             {
                 startTime: req.body.startTime,

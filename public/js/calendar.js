@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const id = $('#calendarID').text();
 
             $.ajax({
-                url: `/api/bookings/${id}`,
+                url: `/api/booking/${id}`,
                 type: 'DELETE',
                 success: function () {
                     calendar.refetchEvents(); //re-retrieves the calendar
