@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         header: {
             //left: prev,next buttons to move the date range backwards and forwards one week
-            left: 'prev,next',
+            left: 'prev,next today',
             //center: title represents the current week period (e.g Nov 22 - 28, 2020)
             center: 'title',
             //right: 'timeGridWeek, timeGridDay allow you to choose between the default week view, or a single-day view
-            right: 'timeGridWeek,timeGridDay',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay',
         },
 
         //defaultDate: '2020-11-22', went for international standard date notation to avoid confusion for different locales
@@ -31,21 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // can click day/week names to navigate views
         navLinks: true,
 
+        // users can click a timeslot (or click and drag to cover a larger time window) to trigger a callback in which we can add an event
+        selectable: true,
+
         //allows events to be edited - dragged, dropped, resized
         editable: true,
 
         // allow "more" link when too many events
         eventLimit: true,
-
-        events: {
-            //retrieving all events from db for the current user
-            url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
-            method: 'GET',
-            failure: function () {
-                alert('there was an error while fetching calendar events');
-            },
-            textColor: 'white', // a non-ajax option
-        },
 
         // Determines if events being dragged and resized are allowed to overlap each other.
         // If given a function, the function will be called every time there is a pair of intersecting
@@ -55,11 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return stillEvent.allDay && movingEvent.allDay;
         },
 
-        //clicking an event fires this
-        eventClick: function () {},
-
         //set to true shows an 'all day' row at the top of the calendar
-        allDaySlot: false,
+        allDaySlot: true,
 
         //set the start time of the calendar
         minTime: '08:00:00',
@@ -73,6 +63,29 @@ document.addEventListener('DOMContentLoaded', function () {
         //removes empty space in the calendar
         height: 'auto',
 
+        // Specifying the Event Source (i.e. where it will grab the array of events from)
+        events: {
+            //retrieving all events from db for the current user
+            url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
+            method: 'GET',
+            failure: function () {
+                alert('there was an error while fetching calendar events');
+            },
+            textColor: 'white', // a non-ajax option
+        },
+
+        //------------------------------------------------
+        // Calendar clicks and interaction
+        //------------------------------------------------
+
+        //clicking/clicking & dragging a date/time/period of dates or times fires this
+        select: function (info) {
+            alert('selected ' + info.startStr + ' to ' + info.endStr); // placeholder functionality - to replace with appropriate action/API route
+        },
+
+        //clicking an event fires this
+        eventClick: function () {},
+
         //function handling when the event is resized (ie, time changed)
         eventResize: function (info) {
             var updatedEvent = {
@@ -83,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            this.updateEvent(updatedEvent)
+            this.updateEvent(updatedEvent);
         },
 
         //when an existing event is dragged and dropped
@@ -96,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            this.updateEvent(updatedEvent)
+            this.updateEvent(updatedEvent);
         },
 
         //method providing ajax call for updating event
@@ -106,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 type: 'PUT',
                 data: updatedEvent,
             });
-        };
+        },
     });
 
     //------------------------------------------------
