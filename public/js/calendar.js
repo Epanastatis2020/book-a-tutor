@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
                 type: 'GET',
                 success: function (res) {
-                    debugger;
                     let mappedEvents = res.map(function (event) {
                         let title;
                         if (sessionStorage.getItem('userType') === 'student') {
@@ -83,11 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         } else {
                             title = event.student.firstName + ' ' + event.student.lastName;
                         }
+                        let fixedStart = event.startTime.slice(0, -5);
+                        let fixedEnd = event.endTime.slice(0, -5);
                         return {
                             id: event.id,
                             title: title,
-                            start: event.startTime,
-                            end: event.endTime,
+                            start: fixedStart,
+                            end: fixedEnd,
                             extendedProps: {
                                 subject: event.Subject.name,
                                 videoLink: event.videoLink,
@@ -111,8 +112,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //clicking/clicking & dragging a date/time/period of dates or times fires this
         select: function (info) {
-            console.log(info);
-            alert('selected ' + info.startStr + ' to ' + info.endStr); // placeholder functionality - to replace with appropriate action/API route
+            $('#bookingModal').modal('show');
+            $('#startTime').val()
         },
 
         //clicking an event fires this
@@ -128,7 +129,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            this.updateEvent(updatedEvent);
+            $.ajax({
+                url: `/api/bookings/${updatedEvent.id}`,
+                type: 'PUT',
+                data: updatedEvent,
+            });
         },
 
         //when an existing event is dragged and dropped
@@ -141,18 +146,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            this.updateEvent(updatedEvent);
-        },
-
-        //method providing ajax call for updating event
-        updateEvent: function (updatedEvent) {
             $.ajax({
                 url: `/api/bookings/${updatedEvent.id}`,
                 type: 'PUT',
                 data: updatedEvent,
             });
         },
-    });
 
     //------------------------------------------------
     // Rendering the calendar
