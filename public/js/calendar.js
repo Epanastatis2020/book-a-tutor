@@ -63,15 +63,46 @@ document.addEventListener('DOMContentLoaded', function () {
         //removes empty space in the calendar
         height: 'auto',
 
-        // Specifying the Event Source (i.e. where it will grab the array of events from)
-        events: {
-            //retrieving all events from db for the current user
-            url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
-            method: 'GET',
-            failure: function () {
-                alert('there was an error while fetching calendar events');
-            },
-            textColor: 'white', // a non-ajax option
+        //function to prepare the Event Source by mapping the API JSON response to a fullcalender Event Object.
+        events: function (info, successCallback, failureCallback) {
+            $.ajax({
+                // calling the appropriate endpoint
+                // there is an option to specify to only fetch events that match the current view period:
+                // data :{
+                // start: info.start.valueOf(),
+                // end: info.end.valueOf()
+                // }
+                url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
+                type: 'GET',
+                success: function (res) {
+                    debugger;
+                    let mappedEvents = res.map(function (event) {
+                        let title;
+                        if (sessionStorage.getItem('userType') === 'student') {
+                            title = event.tutor.firstName + ' ' + event.tutor.lastName;
+                        } else {
+                            title = event.student.firstName + ' ' + event.student.lastName;
+                        }
+                        return {
+                            id: event.id,
+                            title: title,
+                            start: event.startTime,
+                            end: event.endTime,
+                            extendedProps: {
+                                subject: event.Subject.name,
+                                videoLink: event.videoLink,
+                            },
+                            description: event.notes,
+                        };
+                    });
+                    successCallback(mappedEvents);
+                },
+                failure: function (err) {
+                    alert('there was an error while fetching calendar events');
+                    failureCallback(err);
+                },
+                textColor: 'white', // a non-ajax option
+            });
         },
 
         //------------------------------------------------
@@ -80,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //clicking/clicking & dragging a date/time/period of dates or times fires this
         select: function (info) {
+            console.log(info);
             alert('selected ' + info.startStr + ' to ' + info.endStr); // placeholder functionality - to replace with appropriate action/API route
         },
 
@@ -128,76 +160,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $(window).load(function () {
         calendar.render();
-    });
-
-    //------------------------------------------------
-    // Calendar modals
-    //------------------------------------------------
-
-    $(document).ready(function () {
-        //------------------------------------------------
-        // Update/edit event calendar modal
-        //------------------------------------------------
-        var savebtn = document.getElementById('editModalSave');
-        savebtn.addEventListener('click', updateCalendar);
-
-        function updateCalendar() {
-            let tutorName = tutorNameReference; // to replace with actual tutor name path
-            let tutorID = tutorIDReference; // to replace with actual tutor ID path
-            // start date converted to UTC
-            let startDt = new Date($('#startdt').val()).toUTCString();
-            // end date converted to UTC
-            let endDt = new Date($('#enddt').val()).toUTCString();
-
-            // error handling for if the start day/time is after the end day/time
-            if (startDt >= endDt) {
-                $('#modalErrorText').attr('class', 'show'); //modal to be created
-                return;
-            } else {
-                $('#modalErrorText').attr('class', 'hide');
-            }
-
-            $('#calendarModal').modal('hide'); //modal to be created
-
-            var updatedEvent = {
-                title: tutorName,
-                notes: $('#notes').val(),
-                start: startDt,
-                end: endDt,
-                tutorID: tutorID,
-                id: $('#calendarID').text(),
-            };
-
-            $.ajax({
-                url: `/api/bookings/${updatedEvent.id}`,
-                type: 'PUT',
-                data: updatedEvent,
-                success: function () {
-                    calendar.refetchEvents(); //re-retrieves the calendar
-                },
-            });
-        }
-        //end update/edit event calendar modal
-
-        //------------------------------------------------
-        // Delete event calendar modal
-        //------------------------------------------------
-        var deleteBtn = document.getElementById('deleteEvent');
-        deleteBtn.addEventListener('click', deleteEvent);
-
-        function deleteEvent() {
-            $('#calendarModal').modal('hide');
-
-            const id = $('#calendarID').text();
-
-            $.ajax({
-                url: `/api/booking/${id}`,
-                type: 'DELETE',
-                success: function () {
-                    calendar.refetchEvents(); //re-retrieves the calendar
-                },
-            });
-        }
-        // end delete event calendar modal
     });
 });
