@@ -321,3 +321,7 @@ img {
     display: center;
     font-style: italic;
 }
+
+.multi-select {
+    font-size: 11px;
+}

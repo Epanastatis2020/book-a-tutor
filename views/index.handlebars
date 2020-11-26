@@ -203,6 +203,15 @@
               <option>Tutor</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelectSubjects">Select Tutor Subjects</label>
+            <select multiple class="form-control" id="tutorSubjects-input" disabled>
+              {{#each subjects}}
+              <option value="{{this.id}}"> {{this.name}}</option>
+              {{/each}}
+            </select>
+            <p class="multi-select">Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
+          </div>
           <div style="display: none;" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span> <span class="msg"></span>
