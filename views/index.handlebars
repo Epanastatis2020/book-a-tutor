@@ -1,5 +1,6 @@
-{{!-- the first page --}}
+{{!-- the Nav bar at the top --}}
 <header class="header">
+<<<<<<< HEAD
   <div class="topnav">
     <a class="active" href="#home">Home</a>
     {{!-- EDIT signup is not on a modal --}}
@@ -13,16 +14,29 @@
     <a href="#contact">Contact</a>
 >>>>>>> c708f7b1715c65bb84a40df9073cab21179733a7
     <div class="login-container">
+=======
+  <nav class="navbar navbar-light fixed-top topnav">
+    <div>
+      <a class="active" href="#home">Home</a>
+      {{!-- button for signup modal --}}
+      {{!-- <button type="button" class="btn btn-link" data-toggle="modal" href="#signup_modal" data-target="#signup_modal">Signup</button> --}}
+      <a href="#signup_modal" data-toggle="modal" data-target="#signup_modal">Signup</a>
+      {{!-- Contact page --}}
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="login-container ml-auto">
+>>>>>>> 93aa7a627abfd0b44bc847fefb74ef279e1746c9
       <form class="login">
         <button class="login-container btn btn-navy" type="submit">Login</button>
-        <input type="password" class="login-container" placeholder="Password" name="psw" id="password-input">
         <input type="email" class="login-container" placeholder="Enter email" name="email" id="email-input"
           aria-describedby="emailHelp">
+        <input type="password" class="login-container" placeholder="Password" name="psw" id="password-input">
       </form>
     </div>
-  </div>
+  </nav>
 </header>
 
+{{!-- Landing Page --}}
 <main>
   <div class="container-fluid hero-container">
     <!-- video -->
@@ -31,7 +45,7 @@
     </video>
     <div class="hero-content container-fluid text-center">
       <div class="container">
-        <h1 class="brain-title text-center">Book-A-Tutor</h1>
+        <h1 class="text-center">Book-A-Tutor</h1>
       </div>
     </div>
     <div class="row">
@@ -45,6 +59,7 @@
   </div>
 </main>
 
+{{!-- Introductory blurb --}}
 <div class="bg_img">
   <div class="row">
     <div id="intro">
