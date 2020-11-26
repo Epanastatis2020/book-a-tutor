@@ -3,8 +3,15 @@
   <div class="topnav">
     <a class="active" href="#home">Home</a>
     {{!-- EDIT signup is not on a modal --}}
+<<<<<<< HEAD
     <a href="./signup.handlebars">Signup</a>
     <a href="#contact">Contact us</a>
+=======
+    <button type="button" class="btn btn-link" data-toggle="modal" href="" data-target="#signup_modal">Signup</button>
+    {{!-- <a href="#signup_modal" data-toggle="modal">Signup</a> --}}
+    {{!-- will add the Contact page --}}
+    <a href="#contact">Contact</a>
+>>>>>>> c708f7b1715c65bb84a40df9073cab21179733a7
     <div class="login-container">
       <form class="login">
         <button class="login-container btn btn-navy" type="submit">Login</button>
@@ -69,7 +76,7 @@
 {{!-- end of first page --}}
 
 <!-- SIGNUP Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal inmodal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

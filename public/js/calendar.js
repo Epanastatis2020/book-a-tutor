@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         header: {
             //left: prev,next buttons to move the date range backwards and forwards one week
-            left: 'prev,next',
+            left: 'prev,next today',
             //center: title represents the current week period (e.g Nov 22 - 28, 2020)
             center: 'title',
             //right: 'timeGridWeek, timeGridDay allow you to choose between the default week view, or a single-day view
-            right: 'timeGridWeek,timeGridDay',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay',
         },
 
         //defaultDate: '2020-11-22', went for international standard date notation to avoid confusion for different locales
@@ -31,21 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // can click day/week names to navigate views
         navLinks: true,
 
+        // users can click a timeslot (or click and drag to cover a larger time window) to trigger a callback in which we can add an event
+        selectable: true,
+
         //allows events to be edited - dragged, dropped, resized
         editable: true,
 
         // allow "more" link when too many events
         eventLimit: true,
-
-        events: {
-            //retrieving all events from db for the current user
-            url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
-            method: 'GET',
-            failure: function () {
-                alert('there was an error while fetching calendar events');
-            },
-            textColor: 'white', // a non-ajax option
-        },
 
         // Determines if events being dragged and resized are allowed to overlap each other.
         // If given a function, the function will be called every time there is a pair of intersecting
@@ -55,11 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return stillEvent.allDay && movingEvent.allDay;
         },
 
-        //clicking an event fires this
-        eventClick: function () {},
-
         //set to true shows an 'all day' row at the top of the calendar
-        allDaySlot: false,
+        allDaySlot: true,
 
         //set the start time of the calendar
         minTime: '08:00:00',
@@ -73,6 +63,62 @@ document.addEventListener('DOMContentLoaded', function () {
         //removes empty space in the calendar
         height: 'auto',
 
+        //function to prepare the Event Source by mapping the API JSON response to a fullcalender Event Object.
+        events: function (info, successCallback, failureCallback) {
+            $.ajax({
+                // calling the appropriate endpoint
+                // there is an option to specify to only fetch events that match the current view period:
+                // data :{
+                // start: info.start.valueOf(),
+                // end: info.end.valueOf()
+                // }
+                url: `/api/bookings/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('userType')}`,
+                type: 'GET',
+                success: function (res) {
+                    let mappedEvents = res.map(function (event) {
+                        let title;
+                        if (sessionStorage.getItem('userType') === 'student') {
+                            title = event.tutor.firstName + ' ' + event.tutor.lastName;
+                        } else {
+                            title = event.student.firstName + ' ' + event.student.lastName;
+                        }
+                        let fixedStart = event.startTime.slice(0, -5);
+                        let fixedEnd = event.endTime.slice(0, -5);
+                        return {
+                            id: event.id,
+                            title: title,
+                            start: fixedStart,
+                            end: fixedEnd,
+                            extendedProps: {
+                                subject: event.Subject.name,
+                                videoLink: event.videoLink,
+                            },
+                            description: event.notes,
+                        };
+                    });
+                    successCallback(mappedEvents);
+                },
+                failure: function (err) {
+                    alert('there was an error while fetching calendar events');
+                    failureCallback(err);
+                },
+                textColor: 'white', // a non-ajax option
+            });
+        },
+
+        //------------------------------------------------
+        // Calendar clicks and interaction
+        //------------------------------------------------
+
+        //clicking/clicking & dragging a date/time/period of dates or times fires this
+        select: function (info) {
+            $('#bookingModal').modal('show');
+            $('#startTime').val();
+        },
+
+        //clicking an event fires this
+        eventClick: function () {},
+
         //function handling when the event is resized (ie, time changed)
         eventResize: function (info) {
             var updatedEvent = {
@@ -83,7 +129,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            this.updateEvent(updatedEvent)
+            $.ajax({
+                url: `/api/bookings/${updatedEvent.id}`,
+                type: 'PUT',
+                data: updatedEvent,
+            });
         },
 
         //when an existing event is dragged and dropped
@@ -96,17 +146,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: info.event.id,
             };
 
-            this.updateEvent(updatedEvent)
-        },
-
-        //method providing ajax call for updating event
-        updateEvent: function (updatedEvent) {
             $.ajax({
                 url: `/api/bookings/${updatedEvent.id}`,
                 type: 'PUT',
                 data: updatedEvent,
             });
-        };
+        },
     });
 
     //------------------------------------------------
@@ -115,76 +160,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $(window).load(function () {
         calendar.render();
-    });
-
-    //------------------------------------------------
-    // Calendar modals
-    //------------------------------------------------
-
-    $(document).ready(function () {
-        //------------------------------------------------
-        // Update/edit event calendar modal
-        //------------------------------------------------
-        var savebtn = document.getElementById('editModalSave');
-        savebtn.addEventListener('click', updateCalendar);
-
-        function updateCalendar() {
-            let tutorName = tutorNameReference; // to replace with actual tutor name path
-            let tutorID = tutorIDReference; // to replace with actual tutor ID path
-            // start date converted to UTC
-            let startDt = new Date($('#startdt').val()).toUTCString();
-            // end date converted to UTC
-            let endDt = new Date($('#enddt').val()).toUTCString();
-
-            // error handling for if the start day/time is after the end day/time
-            if (startDt >= endDt) {
-                $('#modalErrorText').attr('class', 'show'); //modal to be created
-                return;
-            } else {
-                $('#modalErrorText').attr('class', 'hide');
-            }
-
-            $('#calendarModal').modal('hide'); //modal to be created
-
-            var updatedEvent = {
-                title: tutorName,
-                notes: $('#notes').val(),
-                start: startDt,
-                end: endDt,
-                tutorID: tutorID,
-                id: $('#calendarID').text(),
-            };
-
-            $.ajax({
-                url: `/api/bookings/${updatedEvent.id}`,
-                type: 'PUT',
-                data: updatedEvent,
-                success: function () {
-                    calendar.refetchEvents(); //re-retrieves the calendar
-                },
-            });
-        }
-        //end update/edit event calendar modal
-
-        //------------------------------------------------
-        // Delete event calendar modal
-        //------------------------------------------------
-        var deleteBtn = document.getElementById('deleteEvent');
-        deleteBtn.addEventListener('click', deleteEvent);
-
-        function deleteEvent() {
-            $('#calendarModal').modal('hide');
-
-            const id = $('#calendarID').text();
-
-            $.ajax({
-                url: `/api/booking/${id}`,
-                type: 'DELETE',
-                success: function () {
-                    calendar.refetchEvents(); //re-retrieves the calendar
-                },
-            });
-        }
-        // end delete event calendar modal
     });
 });
