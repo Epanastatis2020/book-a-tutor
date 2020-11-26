@@ -35,7 +35,7 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Subject</label>
-                        <select class="form-control" id="subjectDropdown">
+                        <select class="form-control" id="bookingSubject-input">
                             {{#each subject}}
                             <option>{{name}}</option>
                             {{/each}}
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tutor</label>
-                        <select class="form-control" id="tutorDropdown">
+                        <select class="form-control" id="bookingTutor-input">
                             {{#each user}}
                             {{#if tutor}}
                             <option>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Start Time</label>
-                        <select class="form-control" id="startTime">
+                        <select class="form-control" id="bookingStartTime-input">
                             {{#each booking}}
                             <option>
                                 {{startTime}}
@@ -65,7 +65,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">End Time</label>
-                        <select class="form-control" id="endTime">
+                        <select class="form-control" id="bookingEndTime_input">
                             {{#each booking}}
                             <option>
                                 {{endTime}}
@@ -79,7 +79,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Notes:</label>
-                        <textarea class="form-control" id="topicInput" rows="3"></textarea>
+                        <textarea class="form-control" id="bookingNotes-input" rows="3"></textarea>
                     </div>
                 </form>
             </div>

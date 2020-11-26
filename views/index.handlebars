@@ -11,47 +11,45 @@
     <div class="login-container ml-auto">
       <form class="login">
         <button class="login-container btn btn-navy" type="submit">Login</button>
-        <input type="email" class="login-container" placeholder="Enter email" name="email" id="email-input"
+        <input type="email" class="login-container" placeholder="Enter email" name="email" id="loginEmail-input"
           aria-describedby="emailHelp">
-        <input type="password" class="login-container" placeholder="Password" name="psw" id="password-input">
+        <input type="password" class="login-container" placeholder="Password" name="psw" id="loginPassword-input">
       </form>
     </div>
   </nav>
   {{!-- small JavaScript code for arrows to work smothly --}}
-<script>
-$(document).ready(function(){
-  // Add smooth scrolling to all links
-  $("a").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.attributes.href.value.substr(0, 1) === '#') {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-      // Store hash
-      var hash = this.hash;
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-});
-$(window).scroll(function() {
-    if ($(this).scrollTop()>300)
-     {
-        $('.bounce').hide(1000);
-     }
-    else
-     {
-      $('.bounce').show(1000);
-     }
- });
+  <script>
+    $(document).ready(function () {
+      // Add smooth scrolling to all links
+      $("a").on('click', function (event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.attributes.href.value.substr(0, 1) === '#') {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+          // Store hash
+          var hash = this.hash;
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function () {
 
-</script>
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        } // End if
+      });
+    });
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 300) {
+        $('.bounce').hide(1000);
+      }
+      else {
+        $('.bounce').show(1000);
+      }
+    });
+
+  </script>
 
 </header>
 {{!-- Landing Page --}}
@@ -72,93 +70,99 @@ $(window).scroll(function() {
 {{!-- Introductory blurb --}}
 <div id="first-section"></div>
 <section id="main-s">
-<a href="#first-section" class="bounce"></a>
-<div class="bg_img">
-  <div class="row">
-    <div id="intro">
-      <div class="center-card">
-        <div class="head-card">
-          <h1 class="text-center">Book-A-Tutor</h1>
-          <p class="byline text-center">book your own private tutor | subject-specific online tutoring | search and book
-            online</p>
-          <hr>
+  <a href="#first-section" class="bounce"></a>
+  <div class="bg_img">
+    <div class="row">
+      <div id="intro">
+        <div class="center-card">
+          <div class="head-card">
+            <h1 class="text-center">Book-A-Tutor</h1>
+            <p class="byline text-center">book your own private tutor | subject-specific online tutoring | search and
+              book
+              online</p>
+            <hr>
+          </div>
+          <p class="bodytext">The academic segment of the e-learning market is expected to be valued at over $157.7
+            billion globally by 2025. This growing popularity can be attributed to the various benefits of e-learning
+            for
+            learners as well as educators. Students can learn at their own pace, and educators can adapt their teaching
+            methods to the learning styles of students. That’s a win-win for everyone!</p>
+          <p class="bodytext">This app allows a tutor to provide a blended and flexible learning experience for the
+            learner.
+            Students can make a booking with a tutor who is qualified to support their learning according to their
+            specific needs. Tutors can be chosen according to their subject specialties and available times. Signing up
+            for free allows both student or tutor to acces the relevant information about tutoring dates and times.</p>
+          <p class="bodytext">Welcome to an online learning environment, where tutor and student can work together to
+            solve any questions
+            or learning challenges in a one-to-one learning experience!</p>
+          <p class="bodytext">Happy learning in an environment specific to your needs!</p>
         </div>
-        <p class="bodytext">The academic segment of the e-learning market is expected to be valued at over $157.7
-          billion globally by 2025. This growing popularity can be attributed to the various benefits of e-learning for
-          learners as well as educators. Students can learn at their own pace, and educators can adapt their teaching
-          methods to the learning styles of students. That’s a win-win for everyone!</p>
-        <p class="bodytext">This app allows a tutor to provide a blended and flexible learning experience for the
-          learner.
-          Students can make a booking with a tutor who is qualified to support their learning according to their
-          specific needs. Tutors can be chosen according to their subject specialties and available times. Signing up
-          for free allows both student or tutor to acces the relevant information about tutoring dates and times.</p>
-        <p class="bodytext">Welcome to an online learning environment, where tutor and student can work together to
-          solve any questions
-          or learning challenges in a one-to-one learning experience!</p>
-        <p class="bodytext">Happy learning in an environment specific to your needs!</p>
       </div>
     </div>
   </div>
-</div>
 </section>
 {{!-- for contact --}}
 <section id="contact-s" style="background-color: antiquewhite;">
-<div id="first-section"></div>
-<div class="row1">
-        <div class="col-md-3">
-           <div class="contact-card">
-             <img src="./img/Con-A.png" alt="Team Member: Con">
-             <p>Con Angelakis</p>
-                <a href="mailto:con.angelakis@gmail.com? subject=email & cc=elijam1608@gmail.com,sareronald@hotmail.com,gallagherluke@yahoo.com" style="color: turquoise;">
-                    <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
-                  </a>
-                  <p>con.angelakis@gmail.com</p>
-                  <a target="_blank" href="https://github.com/Epanastatis2020">
-                    <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
-                  </a>
-           </div>
-        </div>
-        <div class="col-md-3">
-            <div class="contact-card">
-              <img src="./img/Luke.png" alt="Team Member: Luke">
-                <p>Luke</p>
-                <a href="mailto:gallagherluke@yahoo.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com" style="color: turquoise;">
-                    <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
-                </a>
-                <p>gallagherluke@yahoo.com</p>
-                <a target="_blank" href="https://github.com/galluk">
-                  <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
-                </a> 
-            </div>
-         </div>
-
+  <div id="first-section"></div>
+  <div class="row1">
     <div class="col-md-3">
-        <div class="contact-card">
-          <img src="./img/Sarah.jpg" alt="Team Member: Sarah">
-          <p>Sarah Ronald </p>
-            <a href="mailto:sareronald@hotmail.com? subject=email & cc=elijam1608@gmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com" style="color: turquoise;">
-                <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
-            </a>
-            <p>sareronald@hotmail.com</p>
-            <a target="_blank" href="https://github.com/sareronald">
-              <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
-            </a>
-        </div>
+      <div class="contact-card">
+        <img src="./img/Con-A.png" alt="Team Member: Con">
+        <p>Con Angelakis</p>
+        <a href="mailto:con.angelakis@gmail.com? subject=email & cc=elijam1608@gmail.com,sareronald@hotmail.com,gallagherluke@yahoo.com"
+          style="color: turquoise;">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        </a>
+        <p>con.angelakis@gmail.com</p>
+        <a target="_blank" href="https://github.com/Epanastatis2020">
+          <img class="social-icon" src="./img/github icon.png" alt="github icon" />
+        </a>
+      </div>
     </div>
     <div class="col-md-3">
-        <div class="contact-card">
-          <img src="./img/Elahe.png" alt="Team Member: Elahe">
-          <p>Elahe JamshidiAraghi</p>
-          <a href="mailto:elijam1608@gmail.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com" style="color: turquoise;">
-            <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
-          </a>
-            <p>elijam1608@gmail.com</p>
-            <a target="_blank" href="https://github.com/Eli-33">
-              <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
-            </a>
-        </div>
-     </div>
-  </div> 
+      <div class="contact-card">
+        <img src="./img/Luke.png" alt="Team Member: Luke">
+        <p>Luke</p>
+        <a href="mailto:gallagherluke@yahoo.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com"
+          style="color: turquoise;">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        </a>
+        <p>gallagherluke@yahoo.com</p>
+        <a target="_blank" href="https://github.com/galluk">
+          <img class="social-icon" src="./img/github icon.png" alt="github icon" />
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="contact-card">
+        <img src="./img/Sarah.jpg" alt="Team Member: Sarah">
+        <p>Sarah Ronald </p>
+        <a href="mailto:sareronald@hotmail.com? subject=email & cc=elijam1608@gmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com"
+          style="color: turquoise;">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        </a>
+        <p>sareronald@hotmail.com</p>
+        <a target="_blank" href="https://github.com/sareronald">
+          <img class="social-icon" src="./img/github icon.png" alt="github icon" />
+        </a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="contact-card">
+        <img src="./img/Elahe.png" alt="Team Member: Elahe">
+        <p>Elahe JamshidiAraghi</p>
+        <a href="mailto:elijam1608@gmail.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com"
+          style="color: turquoise;">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        </a>
+        <p>elijam1608@gmail.com</p>
+        <a target="_blank" href="https://github.com/Eli-33">
+          <img class="social-icon" src="./img/github icon.png" alt="github icon" />
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 {{!-- end of first page --}}
 
@@ -185,15 +189,15 @@ $(window).scroll(function() {
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email" />
+            <input type="email" class="form-control" id="signupEmail-input" placeholder="Email" />
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password" />
+            <input type="password" class="form-control" id="signupPassword-input" placeholder="Password" />
           </div>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Select User Type</label>
-            <select required class="form-control" id="user-input">
+            <select required class="form-control" id="userType-input">
               <option value="" disabled selected hidden>Please choose...</option>
               <option>Student</option>
               <option>Tutor</option>
