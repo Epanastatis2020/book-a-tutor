@@ -7,17 +7,8 @@
     <hr>
 </header>
 
-{{!-- the calander --}}
-{{!-- this calender div needs to be moved down --}}
-
 <div class="container">
-    <div class="row">
-        <div class="container col-md-1"></div>
-        <div class="col-sm-10">
-            <div id='calendarDiv'></div>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
+    <div id='calendarDiv'></div>
 </div>
 
 <!-- Make a BOOKING Modal -->
@@ -35,7 +26,7 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Subject</label>
-                        <select class="form-control" id="subjectDropdown">
+                        <select class="form-control" id="bookingSubject-input">
                             {{#each subject}}
                             <option>{{name}}</option>
                             {{/each}}
@@ -43,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tutor</label>
-                        <select class="form-control" id="tutorDropdown">
+                        <select class="form-control" id="bookingTutor-input">
                             {{#each user}}
                             {{#if tutor}}
                             <option>
@@ -55,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Start Time</label>
-                        <select class="form-control" id="startTime">
+                        <select class="form-control" id="bookingStartTime-input">
                             {{#each booking}}
                             <option>
                                 {{startTime}}
@@ -65,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">End Time</label>
-                        <select class="form-control" id="endTime">
+                        <select class="form-control" id="bookingEndTime_input">
                             {{#each booking}}
                             <option>
                                 {{endTime}}
@@ -79,7 +70,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Notes:</label>
-                        <textarea class="form-control" id="topicInput" rows="3"></textarea>
+                        <textarea class="form-control" id="bookingNotes-input" rows="3"></textarea>
                     </div>
                 </form>
             </div>
@@ -90,3 +81,57 @@
         </div>
     </div>
 </div>
+
+{{!-- functionality for the booking modal --}}
+<script type="text/javascript">
+    $("#bookingSubject-input").on("change", function (event) {
+        event.preventDefault();
+
+        let subjectId = $(this).val();
+
+        // clear the tutor select
+        $('#bookingTutor-input').empty();
+
+        // Send the GET request to get the tutors who tutor this subject
+        $.ajax('/api/subjecttutors/' + subjectId, {
+            type: "GET",
+            success: function (response) {
+
+                // fill the tutor select with the subject's tutors
+                $.each(response, function (i, item) {
+                    $('#bookingTutor-input').append($('<option>', {
+                        value: item.User.id,
+                        text: `${item.User.firstName} ${item.User.lastName}`
+                    }));
+                });
+            }
+        });
+    });
+
+    $("#bookingSaveBtn").on("click", function (event) {
+        event.preventDefault();
+
+        // get the details and save the booking
+        const bookingData = {
+            StudentId: sessionStorage.getItem('userId'),
+            TutorId: $('#bookingTutor-input').val(),
+            SubjectId: $('#bookingSubject-input').val(),
+            // startTime: start.toISOString().slice(0, 19).replace('T', ' '),
+            startTime: $('#bookingStartTime-input').val(),//.slice(0, 19).replace('T', ' '),
+            endTime: $('#bookingEndTime-input').val(),//.slice(0, 19).replace('T', ' '),
+            notes: $('#bookingNotes-input').val().trim()
+        };
+
+        $.post('/api/booking', bookingData)
+            .then(() => {
+                // go back to the members page
+                window.location.replace('/members');
+                // If there's an error, log the error
+            })
+            .fail((err) => {
+                console.log(err);
+            });
+
+    });
+
+</script>
