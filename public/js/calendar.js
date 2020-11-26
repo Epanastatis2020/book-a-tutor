@@ -115,11 +115,17 @@ if (calendarDiv) {
             //clicking/clicking & dragging a date/time/period of dates or times fires this
             select: function (info) {
                 $('#bookingModal').modal('show');
-                $('#startTime').val();
+                let startTime = info.startStr.slice(0, -6);
+                let endTime = info.endStr.slice(0, -6);
+                $('#bookingStartTime-input').val(startTime);
+                $('#bookingEndTime-input').val(endTime);
             },
 
             //clicking an event fires this
-            eventClick: function () {},
+            eventClick: function (info) {
+                $('#bookingModal').modal('show');
+                console.log(info);
+            },
 
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
