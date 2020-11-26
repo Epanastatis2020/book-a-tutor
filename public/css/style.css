@@ -199,6 +199,34 @@ body {
     }
 }
 
+/* contact section */
+.row1,
+.row2 {
+    display: flex;
+}
+.contact-card {
+    background: rgba(84, 138, 160, 0.5);
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: rgba(116, 21, 29, 0.233) 0px 2px 8px 0px;
+    color: hsl(0, 0%, 99%);
+    font-size: 18px;
+    margin: 50px 10px;
+    padding: 30px 40px;
+    /display: block;
+    text-align: center;
+}
+img {
+    width: 200px;
+    height: 200px;
+}
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background-size: 30px 30px;
+    background-color: whitesmoke;
+}
+
 /* Background image */
 .bg_img {
     background: url('https://user-images.githubusercontent.com/67722377/100095242-4d3d9200-2eae-11eb-8643-99edf170bd82.jpg')
