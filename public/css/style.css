@@ -116,84 +116,6 @@ body {
     color: #fff;
 }
 
-/* Bouncing arrow */
-.arrow {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    margin-left: -22px;
-    margin-bottom: 50px;
-    width: 40px;
-    height: 40px;
-    background-size: contain;
-}
-
-.bounce {
-    -moz-animation: bounce 3s infinite;
-    -webkit-animation: bounce 3s infinite;
-    animation: bounce 3s infinite;
-}
-@-moz-keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        -moz-transform: translateY(0);
-        transform: translateY(0);
-    }
-    40% {
-        -moz-transform: translateY(-30px);
-        transform: translateY(-30px);
-    }
-    60% {
-        -moz-transform: translateY(-15px);
-        transform: translateY(-15px);
-    }
-}
-@-webkit-keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-    40% {
-        -webkit-transform: translateY(-30px);
-        transform: translateY(-30px);
-    }
-    60% {
-        -webkit-transform: translateY(-15px);
-        transform: translateY(-15px);
-    }
-}
-@keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-    40% {
-        -moz-transform: translateY(-30px);
-        -ms-transform: translateY(-30px);
-        -webkit-transform: translateY(-30px);
-        transform: translateY(-30px);
-    }
-    60% {
-        -moz-transform: translateY(-15px);
-        -ms-transform: translateY(-15px);
-        -webkit-transform: translateY(-15px);
-        transform: translateY(-15px);
-    }
-}
-
 /* Background image */
 .bg_img {
     background: url('https://user-images.githubusercontent.com/67722377/100095242-4d3d9200-2eae-11eb-8643-99edf170bd82.jpg')
@@ -278,7 +200,7 @@ body {
 
 .footer-sticky {
     background: rgba(84, 138, 160, 0.5);
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: 50px;
@@ -287,4 +209,72 @@ body {
     color: white;
     display: center;
     font-style: italic;
+}
+
+.bounce {
+  position:fixed;
+  left:50%;
+  bottom:0;
+  margin-top:-25px;
+  margin-left:-25px;
+  height:50px;
+  width:50px;
+  background: url('https://static1.squarespace.com/static/5e78f290575a6321739eba41/t/5ec8625c6dad0e25fa5a8234/1590190684880/Arrow.png');
+  background-size: 100% auto;
+  -webkit-animation:bounce 1s infinite;
+  -moz-animation:bounce 1s infinite;
+  -o-animation:bounce 1s infinite;
+  animation:bounce 1s infinite;
+
+}
+
+@-webkit-keyframes bounce {
+  0%       { bottom:0px; }
+  50%      { bottom:15px; }
+  100%     {bottom:30;}
+}
+
+ @-moz-keyframes bounce {
+  0%       { bottom:0px; }
+  50%      { bottom:15px; }
+  100%     {bottom:30;}
+}
+
+ @-o-keyframes bounce {
+  0%       { bottom:0px; }
+  50%      { bottom:15px; }
+  100%     {bottom:30;}
+}
+
+ @keyframes bounce {
+  0%       { bottom:0px; }
+  50%      { bottom:15px; }
+  100%     {bottom:30;}
+}
+
+/* contact section */
+.row1, .row2{
+    display: flex;
+}
+.contact-card {
+    background: rgba(84, 138, 160, 0.5);
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: rgba(116, 21, 29, 0.233) 0px 2px 8px 0px;
+    color: hsl(0, 0%, 99%);
+    font-size: 18px;
+    margin: 50px 10px;
+    padding: 30px 40px;
+    /* display: block; */
+    text-align: center;
+}
+img{
+    width: 200px;
+    height: 200px;
+}
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background-size: 30px 30px;
+    background-color: whitesmoke;
 }

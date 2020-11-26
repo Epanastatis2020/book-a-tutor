@@ -2,12 +2,11 @@
 <header class="header">
   <nav class="navbar navbar-light fixed-top topnav">
     <div>
-      <a class="active" href="#home">Home</a>
+      <a class="active" href="#main-s">Home</a>
       {{!-- button for signup modal --}}
-      {{!-- <button type="button" class="btn btn-link" data-toggle="modal" href="#signup_modal" data-target="#signup_modal">Signup</button> --}}
       <a href="#signup_modal" data-toggle="modal" data-target="#signup_modal">Signup</a>
       {{!-- Contact page --}}
-      <a href="#contact">Contact</a>
+      <a href="#contact-s">Contact</a>
     </div>
     <div class="login-container ml-auto">
       <form class="login">
@@ -18,13 +17,48 @@
       </form>
     </div>
   </nav>
-</header>
+  {{!-- small JavaScript code for arrows to work smothly --}}
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.attributes.href.value.substr(0, 1) === '#') {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+      // Store hash
+      var hash = this.hash;
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+$(window).scroll(function() {
+    if ($(this).scrollTop()>300)
+     {
+        $('.bounce').hide(1000);
+     }
+    else
+     {
+      $('.bounce').show(1000);
+     }
+ });
 
+</script>
+
+</header>
 {{!-- Landing Page --}}
 <main>
   <div class="container-fluid hero-container">
     <!-- video -->
-    <video id="home-hero-video" autoplay muted loop>
+    { <video id="home-hero-video" autoplay muted loop>
       <source type="video/mp4" src="video/brainSequence98.mp4" />
     </video>
     <div class="hero-content container-fluid text-center">
@@ -32,18 +66,13 @@
         <h1 class="text-center">Book-A-Tutor</h1>
       </div>
     </div>
-    <div class="row">
-      <div class="arrow bounce col-md-12">
-        <a href="#intro">
-          <img width="40" height="40" alt=""
-            src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yOTMuNzUxLDQ1NS44NjhjLTIwLjE4MSwyMC4xNzktNTMuMTY1LDE5LjkxMy03My42NzMtMC41OTVsMCwwYy0yMC41MDgtMjAuNTA4LTIwLjc3My01My40OTMtMC41OTQtNzMuNjcyICBsMTg5Ljk5OS0xOTBjMjAuMTc4LTIwLjE3OCw1My4xNjQtMTkuOTEzLDczLjY3MiwwLjU5NWwwLDBjMjAuNTA4LDIwLjUwOSwyMC43NzIsNTMuNDkyLDAuNTk1LDczLjY3MUwyOTMuNzUxLDQ1NS44Njh6Ii8+DQo8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjIwLjI0OSw0NTUuODY4YzIwLjE4LDIwLjE3OSw1My4xNjQsMTkuOTEzLDczLjY3Mi0wLjU5NWwwLDBjMjAuNTA5LTIwLjUwOCwyMC43NzQtNTMuNDkzLDAuNTk2LTczLjY3MiAgbC0xOTAtMTkwYy0yMC4xNzgtMjAuMTc4LTUzLjE2NC0xOS45MTMtNzMuNjcxLDAuNTk1bDAsMGMtMjAuNTA4LDIwLjUwOS0yMC43NzIsNTMuNDkyLTAuNTk1LDczLjY3MUwyMjAuMjQ5LDQ1NS44Njh6Ii8+DQo8L3N2Zz4=" />
-        </a>
-      </div>
-    </div>
   </div>
 </main>
 
 {{!-- Introductory blurb --}}
+<div id="first-section"></div>
+<section id="main-s">
+<a href="#first-section" class="bounce"></a>
 <div class="bg_img">
   <div class="row">
     <div id="intro">
@@ -71,7 +100,66 @@
     </div>
   </div>
 </div>
+</section>
+{{!-- for contact --}}
+<section id="contact-s" style="background-color: antiquewhite;">
+<div id="first-section"></div>
+<div class="row1">
+        <div class="col-md-3">
+           <div class="contact-card">
+             <img src="./img/Con-A.png" alt="Team Member: Con">
+             <p>Con Angelakis</p>
+                <a href="mailto:con.angelakis@gmail.com? subject=email & cc=elijam1608@gmail.com,sareronald@hotmail.com,gallagherluke@yahoo.com" style="color: turquoise;">
+                    <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+                  </a>
+                  <p>con.angelakis@gmail.com</p>
+                  <a target="_blank" href="https://github.com/Epanastatis2020">
+                    <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
+                  </a>
+           </div>
+        </div>
+        <div class="col-md-3">
+            <div class="contact-card">
+              <img src="./img/Luke.png" alt="Team Member: Luke">
+                <p>Luke</p>
+                <a href="mailto:gallagherluke@yahoo.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com" style="color: turquoise;">
+                    <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+                </a>
+                <p>gallagherluke@yahoo.com</p>
+                <a target="_blank" href="https://github.com/galluk">
+                  <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
+                </a> 
+            </div>
+         </div>
 
+    <div class="col-md-3">
+        <div class="contact-card">
+          <img src="./img/Sarah.jpg" alt="Team Member: Sarah">
+          <p>Sarah Ronald </p>
+            <a href="mailto:sareronald@hotmail.com? subject=email & cc=elijam1608@gmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com" style="color: turquoise;">
+                <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+            </a>
+            <p>sareronald@hotmail.com</p>
+            <a target="_blank" href="https://github.com/sareronald">
+              <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="contact-card">
+          <img src="./img/Elahe.png" alt="Team Member: Elahe">
+          <p>Elahe JamshidiAraghi</p>
+          <a href="mailto:elijam1608@gmail.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com" style="color: turquoise;">
+            <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+          </a>
+            <p>elijam1608@gmail.com</p>
+            <a target="_blank" href="https://github.com/Eli-33">
+              <img class="social-icon" src="./img/github icon.png" alt="github icon"/>
+            </a>
+        </div>
+     </div>
+  </div> 
+</section>
 {{!-- end of first page --}}
 
 <!-- SIGNUP Modal -->
