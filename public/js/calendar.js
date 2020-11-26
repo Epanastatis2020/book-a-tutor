@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //clicking/clicking & dragging a date/time/period of dates or times fires this
         select: function (info) {
             $('#bookingModal').modal('show');
-            $('#startTime').val()
+            $('#startTime').val();
         },
 
         //clicking an event fires this
@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: updatedEvent,
             });
         },
+    });
 
     //------------------------------------------------
     // Rendering the calendar
