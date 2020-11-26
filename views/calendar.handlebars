@@ -43,9 +43,9 @@
                 <label for="bookingEndTime">End Time</label>
                 <input type="datetime-local" id="bookingEndTime-input" name="bookingEndTime">
             </div>
-            <div>
-                <p>Link to your online tutoring sessions with {{firstName}}{{lastName}} <a
-                        href="{{videoLink}}"><small>www.bookatutorvideo.com/987654</small></a></p>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Link to your online tutoring sessions with {{firstName}}{{lastName}}</label>
+                <textarea class="form-control" id="videoLink-input" rows="1"></textarea>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Notes:</label>
@@ -120,7 +120,8 @@
             // startTime: start.toISOString().slice(0, 19).replace('T', ' '),
             startTime: $('#bookingStartTime-input').val(),//.slice(0, 19).replace('T', ' '),
             endTime: $('#bookingEndTime-input').val(),//.slice(0, 19).replace('T', ' '),
-            notes: $('#bookingNotes-input').val().trim()
+            notes: $('#bookingNotes-input').val().trim(),
+            videoLink: $('#videoLink-input').val().trim()
         };
 
         $.post('/api/booking', bookingData)

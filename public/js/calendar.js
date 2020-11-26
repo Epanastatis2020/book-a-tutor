@@ -124,9 +124,17 @@ if (calendarDiv) {
             //clicking an event fires this
             eventClick: function (info) {
                 $('#bookingModal').modal('show');
-                console.log(info);
+                let startTimeJSON = JSON.stringify(info.event.start);
+                let startTime = startTimeJSON.slice(1, -6);
+                let endTimeJSON = JSON.stringify(info.event.end);
+                let endTime = endTimeJSON.slice(1, -6);
+                $('#bookingStartTime-input').val(startTime);
+                $('#bookingEndTime-input').val(endTime);
+                $('#bookingTutor-input').val(info.event.title);
+                $('#bookingSubject-input').val(info.event.extendedProps.subject);
+                $('#bookingNotes-input').val(info.event.extendedProps.description);
+                $('#videoLink-input').val(info.event.extendedProps.videoLink);
             },
-
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
                 var updatedEvent = {
