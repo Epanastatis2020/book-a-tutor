@@ -1,42 +1,16 @@
+{{!-- This is the original header --}}
 <header class="header">
-    <nav class="navbar navbar-light fixed-top topnav">
-        <div class="logout ml-auto" class="collapse navbar-collapse" id="navbarNavDropdown">
-            <h1 class="bat-title">Book-A-Tutor</h1>
-            <p class="byline">book your own private tutor | subject-specific online tutoring | search and book online
-            </p>
-            <hr>
-            {{!-- Elahe, in class the other night we were taking about having the users name in the top right hand corner 
-            and then having a dropdown with a logout option? started to play with this idea, but have not see what 
-            it looks like on the browser yet, because I could only login this morning. It could be all over the place --}}
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{!-- use handlebars here to get the users name - this text is just stand in until I can add the correct {{ }} syntax for this --}}
-                        + user name
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
-{{!-- This is the old header if you would like to us this instead --}}
-{{!-- <header class="header">
     <h1 class="bat-title">Book-A-Tutor
-        <button class="navbar-brand btn btn-navy" style="float:right; margin: 20PX;">Logout</button>
+        <button class="navbar-brand btnLogout" style="float:right; margin: 20PX;">Logout</button>
     </h1>
     <p class="byline">book your own private tutor | subject-specific online tutoring | search and book online</p>
     <hr>
-</header> --}}
+</header>
 
 {{!-- the calander --}}
 {{!-- this calender div needs to be moved down --}}
-{{!-- started to play with this last night, but have not seen it on the screen yet --}}
-<div class="bg_img">
+
+<div class="container">
     <div class="row">
         <div class="container col-md-1"></div>
         <div class="col-sm-10">

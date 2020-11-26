@@ -230,11 +230,10 @@ body {
     padding: 30px 40px;
 }
 
-#calendar {
-    max-width: 400px;
-    margin: 40px auto;
+#calendarDiv {
+    margin-top: 130px;
+    margin-bottom: 200px;
 }
-
 /* info card on landing page about online tutoring */
 .center-card {
     background: rgba(84, 138, 160, 0.5);
