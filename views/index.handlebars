@@ -17,7 +17,7 @@
       </form>
     </div>
   </nav>
-  {{!-- small JavaScript code for arrows to work smothly --}}
+  {{!-- small JavaScript code for arrows to work smoothly --}}
   <script>
     $(document).ready(function () {
       // Add smooth scrolling to all links
@@ -216,3 +216,15 @@
     </div>
   </div>
 </div>
+
+{{!-- functionality for user input --}}
+<script type="text/javascript">
+  $("#userType-input").on("change", function (event) {
+    event.preventDefault();
+
+    let userType = $(this).val();
+
+    $('#tutorSubjects-input').attr('disabled', userType === 'student');
+  });
+
+</script>

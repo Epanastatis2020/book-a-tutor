@@ -90,3 +90,57 @@
         </div>
     </div>
 </div>
+
+{{!-- functionality for the booking modal --}}
+<script type="text/javascript">
+    $("#bookingSubject-input").on("change", function (event) {
+        event.preventDefault();
+
+        let subjectId = $(this).val();
+
+        // clear the tutor select
+        $('#bookingTutor-input').empty();
+
+        // Send the GET request to get the tutors who tutor this subject
+        $.ajax('/api/subjecttutors/' + subjectId, {
+            type: "GET",
+            success: function (response) {
+
+                // fill the tutor select with the subject's tutors
+                $.each(response, function (i, item) {
+                    $('#bookingTutor-input').append($('<option>', {
+                        value: item.User.id,
+                        text: `${item.User.firstName} ${item.User.lastName}`
+                    }));
+                });
+            }
+        });
+    });
+
+    $("#bookingSaveBtn").on("click", function (event) {
+        event.preventDefault();
+
+        // get the details and save the booking
+        const bookingData = {
+            StudentId: sessionStorage.getItem('userId'),
+            TutorId: $('#bookingTutor-input').val(),
+            SubjectId: $('#bookingSubject-input').val(),
+            // startTime: start.toISOString().slice(0, 19).replace('T', ' '),
+            startTime: $('#bookingStartTime-input').val(),//.slice(0, 19).replace('T', ' '),
+            endTime: $('#bookingEndTime-input').val(),//.slice(0, 19).replace('T', ' '),
+            notes: $('#bookingNotes-input').val().trim()
+        };
+
+        $.post('/api/booking', bookingData)
+            .then(() => {
+                // go back to the members page
+                window.location.replace('/members');
+                // If there's an error, log the error
+            })
+            .fail((err) => {
+                console.log(err);
+            });
+
+    });
+
+</script>
