@@ -1,10 +1,16 @@
 {{!-- This is the original header --}}
 <header class="header">
+    <nav class=" navbar-light topnav">
     <h1 class="bat-title">Book-A-Tutor
-        <button class="navbar-brand btnLogout" style="float:right; margin: 20PX;">Logout</button>
+ <div class="dropdown">
+    <button class="dropbtn">LOGOUT</button>
+       <div class="dropdown-content">
+          <a class="btnLogout"  style="padding: 0%;" href="#">Logout</a>
+       </div>
+ </div>
     </h1>
-    <p class="byline">book your own private tutor | subject-specific online tutoring | search and book online</p>
     <hr>
+    </nav>
 </header>
 
 <div class="container">
@@ -63,6 +69,8 @@
 
 {{!-- functionality for the booking modal --}}
 <script type="text/javascript">
+
+
     $('#bookingModal').on('shown.bs.modal', function (event) {
         event.preventDefault();
 
@@ -136,3 +144,4 @@
     });
 
 </script>
+
