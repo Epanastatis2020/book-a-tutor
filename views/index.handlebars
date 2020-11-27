@@ -4,13 +4,13 @@
     <div>
       <a class="active" href="#main-s">Home</a>
       {{!-- button for signup modal --}}
-      <a href="#signup_modal" data-toggle="modal" data-target="#signup_modal">Signup</a>
+      <a href="#signup_modal" data-toggle="modal" data-target="#signup_modal" style="color:white;">Signup</a>
       {{!-- Contact page --}}
-      <a href="#contact-s">Contact</a>
+      <a href="#contact-s" style="color:white;">Contact</a>
     </div>
     <div class="login-container ml-auto">
       <form class="login">
-        <button class="login-container btn btn-navy" type="submit">Login</button>
+        <button class="login-container btn" type="submit">Login</button>
         <input type="email" class="login-container" placeholder="Enter email" name="email" id="loginEmail-input"
           aria-describedby="emailHelp">
         <input type="password" class="login-container" placeholder="Password" name="psw" id="loginPassword-input">
@@ -102,34 +102,34 @@
   </div>
 </section>
 {{!-- for contact  --}}
-<section id="contact-s" style="background-color: antiquewhite;">
+<section id="contact-s" style="background-color: #0f2034;">
   <div id="first-section"></div>
   <div class="row1">
     <div class="col-md-3">
       <div class="contact-card">
         <img src="./img/Con-A.png" alt="Team Member: Con">
-        <p>Con Angelakis</p>
-        <a href="mailto:con.angelakis@gmail.com? subject=email & cc=elijam1608@gmail.com,sareronald@hotmail.com,gallagherluke@yahoo.com"
-          style="color: turquoise;">
-          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        <p class="contact-name">Con Angelakis</p>
+        <a
+          href="mailto:con.angelakis@gmail.com? subject=email & cc=elijam1608@gmail.com,sareronald@hotmail.com,gallagherluke@yahoo.com">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;'></i>
         </a>
-        <p>con.angelakis@gmail.com</p>
-        <a target="_blank" href="https://github.com/Epanastatis2020">
-          <img class="social-icon" src="./img/githubicon.png" alt="github icon" />
+        {{!-- <p class="contactE">con.angelakis@gmail.com</p> --}}
+        <a target="_blank" href="https://github.com/Epanastatis2020"><i class="fab fa-github social-icon"
+            style='font-size:40px;'></i>
         </a>
       </div>
     </div>
     <div class="col-md-3">
       <div class="contact-card">
         <img src="./img/Luke.png" alt="Team Member: Luke">
-        <p>Luke</p>
-        <a href="mailto:gallagherluke@yahoo.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com"
-          style="color: turquoise;">
-          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        <p class="contact-name">Luke Gallagher</p>
+        <a
+          href="mailto:gallagherluke@yahoo.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;'></i>
         </a>
-        <p>gallagherluke@yahoo.com</p>
-        <a target="_blank" href="https://github.com/galluk">
-          <img class="social-icon" src="./img/githubicon.png" alt="github icon" />
+        {{!-- <p class="contactE">gallagherluke@yahoo.com</p> --}}
+        <a target="_blank" href="https://github.com/galluk"><i class="fab fa-github social-icon"
+            style='font-size:40px;'></i>
         </a>
       </div>
     </div>
@@ -137,28 +137,28 @@
     <div class="col-md-3">
       <div class="contact-card">
         <img src="./img/Sarah.jpg" alt="Team Member: Sarah">
-        <p>Sarah Ronald </p>
-        <a href="mailto:sareronald@hotmail.com? subject=email & cc=elijam1608@gmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com"
-          style="color: turquoise;">
-          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        <p class="contact-name">Sarah Ronald </p>
+        <a
+          href="mailto:sareronald@hotmail.com? subject=email & cc=elijam1608@gmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;'></i>
         </a>
-        <p>sareronald@hotmail.com</p>
-        <a target="_blank" href="https://github.com/sareronald">
-          <img class="social-icon" src="./img/githubicon.png" alt="github icon" />
+        {{!-- <p class="contactE">sareronald@hotmail.com</p> --}}
+        <a target="_blank" href="https://github.com/sareronald"><i class="fab fa-github social-icon"
+            style='font-size:40px;'></i>
         </a>
       </div>
     </div>
     <div class="col-md-3">
       <div class="contact-card">
         <img src="./img/Elahe.png" alt="Team Member: Elahe">
-        <p>Elahe JamshidiAraghi</p>
-        <a href="mailto:elijam1608@gmail.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com"
-          style="color: turquoise;">
-          <i class='fas fa-envelope-square social-icon' style='font-size:40px;color: turquoise'></i>
+        <p class="contact-name">Elahe Jamshidi Araghi</p>
+        <a
+          href="mailto:elijam1608@gmail.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com">
+          <i class='fas fa-envelope-square social-icon' style='font-size:40px;'></i>
         </a>
-        <p>elijam1608@gmail.com</p>
-        <a target="_blank" href="https://github.com/Eli-33">
-          <img class="social-icon" src="./img/githubicon.png" alt="github icon" />
+        {{!-- <p class="contactE">elijam1608@gmail.com</p> --}}
+        <a target="_blank" href="https://github.com/Eli-33"><i class="fab fa-github social-icon"
+            style='font-size:40px;'></i>
         </a>
       </div>
     </div>
@@ -206,7 +206,7 @@
           <div class="form-group">
             <label for="exampleFormControlSelectSubjects">Select Tutor Subjects</label>
             <select multiple class="form-control" id="tutorSubjects-input" disabled></select>
-            <p>Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
+            <p class="multi-select">Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
           </div>
           <div style="display: none;" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -224,27 +224,27 @@
 
 {{!-- functionality for user input --}}
 <script type="text/javascript">
-    $('#signup_modal').on('shown.bs.modal', function (event) {
-        event.preventDefault();
+  $('#signup_modal').on('shown.bs.modal', function (event) {
+    event.preventDefault();
 
-        // clear the subject select
-        $('#tutorSubjects-input').empty();
+    // clear the subject select
+    $('#tutorSubjects-input').empty();
 
-        // Send the GET request to get all the subjects
-        $.ajax('/api/subjects', {
-            type: "GET",
-            success: function (response) {
+    // Send the GET request to get all the subjects
+    $.ajax('/api/subjects', {
+      type: "GET",
+      success: function (response) {
 
-                // fill the subject select with the subjects
-                $.each(response, function (i, item) {
-                    $('#tutorSubjects-input').append($('<option>', {
-                        value: item.id,
-                        text: `${item.name}`
-                    }));
-                });
-            }
+        // fill the subject select with the subjects
+        $.each(response, function (i, item) {
+          $('#tutorSubjects-input').append($('<option>', {
+            value: item.id,
+            text: `${item.name}`
+          }));
         });
+      }
     });
+  });
 
   $("#userType-input").on("change", function (event) {
     event.preventDefault();
