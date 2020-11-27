@@ -201,6 +201,7 @@ body {
 /* contact section */
 .row1 {
     display: flex;
+    margin-bottom: 40px;
 }
 
 .contact-card {
@@ -237,7 +238,7 @@ img {
 /* Background image */
 .bg_img {
     background: url('https://user-images.githubusercontent.com/67722377/100095242-4d3d9200-2eae-11eb-8643-99edf170bd82.jpg')
-        no-repeat center top fixed;
+        center top fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
