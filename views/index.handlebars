@@ -10,7 +10,7 @@
     </div>
     <div class="login-container ml-auto">
       <form class="login">
-        <button class="login-container btn btn-navy" type="submit">Login</button>
+        <button class="login-container btn" type="submit">Login</button>
         <input type="email" class="login-container" placeholder="Enter email" name="email" id="loginEmail-input"
           aria-describedby="emailHelp">
         <input type="password" class="login-container" placeholder="Password" name="psw" id="loginPassword-input">
@@ -206,7 +206,7 @@
           <div class="form-group">
             <label for="exampleFormControlSelectSubjects">Select Tutor Subjects</label>
             <select multiple class="form-control" id="tutorSubjects-input" disabled></select>
-            <p>Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
+            <p class="multi-select">Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
           </div>
           <div style="display: none;" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -224,27 +224,27 @@
 
 {{!-- functionality for user input --}}
 <script type="text/javascript">
-    $('#signup_modal').on('shown.bs.modal', function (event) {
-        event.preventDefault();
+  $('#signup_modal').on('shown.bs.modal', function (event) {
+    event.preventDefault();
 
-        // clear the subject select
-        $('#tutorSubjects-input').empty();
+    // clear the subject select
+    $('#tutorSubjects-input').empty();
 
-        // Send the GET request to get all the subjects
-        $.ajax('/api/subjects', {
-            type: "GET",
-            success: function (response) {
+    // Send the GET request to get all the subjects
+    $.ajax('/api/subjects', {
+      type: "GET",
+      success: function (response) {
 
-                // fill the subject select with the subjects
-                $.each(response, function (i, item) {
-                    $('#tutorSubjects-input').append($('<option>', {
-                        value: item.id,
-                        text: `${item.name}`
-                    }));
-                });
-            }
+        // fill the subject select with the subjects
+        $.each(response, function (i, item) {
+          $('#tutorSubjects-input').append($('<option>', {
+            value: item.id,
+            text: `${item.name}`
+          }));
         });
+      }
     });
+  });
 
   $("#userType-input").on("change", function (event) {
     event.preventDefault();
