@@ -92,7 +92,7 @@ if (calendarDiv) {
                                 start: fixedStart,
                                 end: fixedEnd,
                                 extendedProps: {
-                                    subject: event.Subject.name,
+                                    subject: event.Subject,
                                     videoLink: event.videoLink,
                                 },
                                 description: event.notes,
@@ -135,6 +135,7 @@ if (calendarDiv) {
                 $('#bookingNotes-input').val(info.event.extendedProps.description);
                 $('#videoLink-input').val(info.event.extendedProps.videoLink);
             },
+
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
                 var updatedEvent = {
