@@ -130,6 +130,8 @@ if (calendarDiv) {
 
             //clicking an event fires this
             eventClick: function (info) {
+                console.log(info);
+                $('#bookingDivWithID').data('bookingID', info.event.id);
                 $('#bookingModal').modal('show');
                 //formatting the date object into a string
                 startTimeStr = dayjs(info.event.start).format();
