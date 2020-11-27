@@ -8,6 +8,12 @@ const $logoutButton = $('#logoutButton');
 //Storing the user's email
 const userEmailRef = sessionStorage.getItem('userEmail');
 
+//Storing the user's userType
+const userType = sessionStorage.getItem('userType');
+
+//Storing the user's Id
+const UserID = sessionStorage.getItem('userId');
+
 //------------------------------------------------
 // Initialising the calendar
 //------------------------------------------------
@@ -84,25 +90,42 @@ if (calendarDiv) {
                     type: 'GET',
                     success: function (res) {
                         let mappedEvents = res.map(function (event) {
-                            let title;
-                            if (sessionStorage.getItem('userType') === 'student') {
-                                title = event.tutor.firstName + ' ' + event.tutor.lastName;
-                            } else {
-                                title = event.student.firstName + ' ' + event.student.lastName;
-                            }
+                            //convert the time object returned by the database into something the calendar can recognise
                             let fixedStart = new Date(event.startTime);
                             let fixedEnd = new Date(event.endTime);
-                            return {
-                                id: event.id,
-                                title: title,
-                                start: fixedStart,
-                                end: fixedEnd,
-                                extendedProps: {
-                                    subject: event.Subject,
-                                    videoLink: event.videoLink,
-                                },
-                                description: event.notes,
-                            };
+                            if (userType === 'student') {
+                                return {
+                                    id: event.id,
+                                    title: event.tutor.firstName + ' ' + event.tutor.lastName,
+                                    start: fixedStart,
+                                    end: fixedEnd,
+                                    extendedProps: {
+                                        subjectName: event.Subject.name,
+                                        subjectId: event.Subject.id,
+                                        videoLink: event.videoLink,
+                                        tutorId: event.tutor.id,
+                                        //when the user is a student, StudentId and userId should be the same
+                                        StudentId: event.StudentId,
+                                        userId: UserID,
+                                    },
+                                    description: event.notes,
+                                };
+                            } else {
+                                return {
+                                    id: event.id,
+                                    title: event.student.firstName + ' ' + event.student.lastName,
+                                    start: fixedStart,
+                                    end: fixedEnd,
+                                    extendedProps: {
+                                        subjectName: event.Subject.name,
+                                        subjectId: event.Subject.id,
+                                        videoLink: event.videoLink,
+                                        StudentId: event.StudentId,
+                                        userId: UserID,
+                                    },
+                                    description: event.notes,
+                                };
+                            }
                         });
                         successCallback(mappedEvents);
                     },
@@ -119,13 +142,16 @@ if (calendarDiv) {
             //------------------------------------------------
 
             //clicking/clicking & dragging a date/time/period of dates or times fires this
+            //only available to Students as Tutors shouldn't be creating requests for tutor sessions
             select: function (info) {
-                $('#bookingModal').modal('show');
-                //removing the timezone offset from the string
-                let startTime = info.startStr.slice(0, -6);
-                let endTime = info.endStr.slice(0, -6);
-                $('#bookingStartTime-input').val(startTime);
-                $('#bookingEndTime-input').val(endTime);
+                if (userType === 'student') {
+                    $('#bookingModal').modal('show');
+                    //removing the timezone offset from the string
+                    let startTime = info.startStr.slice(0, -6);
+                    let endTime = info.endStr.slice(0, -6);
+                    $('#bookingStartTime-input').val(startTime);
+                    $('#bookingEndTime-input').val(endTime);
+                }
             },
 
             //clicking an event fires this
@@ -149,35 +175,48 @@ if (calendarDiv) {
 
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
-                var updatedEvent = {
-                    tutor: info.event.tutor,
-                    notes: info.event.notes,
-                    startTime: info.event.start,
-                    endTime: info.event.end,
-                    id: info.event.id,
+                // get the details and convert from calendar event to database event format
+                startTimeStr = dayjs(info.event.start).format();
+                endTimeStr = dayjs(info.event.end).format();
+                let bookingData = {
+                    //info.event is the new event details after being dragged, while info.oldEvent are the original details
+                    id: info.oldEvent.id,
+                    start: startTimeStr,
+                    end: endTimeStr,
+                    notes: info.oldEvent.extendedProps.description,
+                    videoLink: info.oldEvent.extendedProps.videoLink,
+                    StudentId: info.oldEvent.extendedProps.StudentId,
+                    TutorId: info.oldEvent.extendedProps.tutorId,
                 };
 
                 $.ajax({
-                    url: `/api/bookings/${updatedEvent.id}`,
+                    url: `/api/bookings/`,
                     type: 'PUT',
-                    data: updatedEvent,
+                    data: bookingData,
                 });
             },
 
             //when an existing event is dragged and dropped
             eventDrop: function (info) {
-                var updatedEvent = {
-                    tutor: info.event.tutor,
-                    notes: info.event.notes,
-                    startTime: info.event.start,
-                    endTime: info.event.end,
-                    id: info.event.id,
+                console.log(info);
+                // get the details and convert from calendar event to database event format
+                startTimeStr = dayjs(info.event.start).format();
+                endTimeStr = dayjs(info.event.end).format();
+                let bookingData = {
+                    //info.event is the new event details after being dragged, while info.oldEvent are the original details
+                    id: info.oldEvent.id,
+                    start: startTimeStr,
+                    end: endTimeStr,
+                    notes: info.oldEvent.extendedProps.description,
+                    videoLink: info.oldEvent.extendedProps.videoLink,
+                    StudentId: info.oldEvent.extendedProps.StudentId,
+                    TutorId: info.oldEvent.extendedProps.tutorId,
                 };
 
                 $.ajax({
-                    url: `/api/bookings/${updatedEvent.id}`,
+                    url: `/api/bookings/`,
                     type: 'PUT',
-                    data: updatedEvent,
+                    data: bookingData,
                 });
             },
         });
