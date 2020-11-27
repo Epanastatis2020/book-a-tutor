@@ -14,6 +14,24 @@ const userEmailRef = sessionStorage.getItem('userEmail');
 // only want to do it if we are showing the calendar page
 var calendarDiv = document.getElementById('calendarDiv');
 
+function updateBooking(bookingInfo) {
+    sessionStorage.setItem('newEvent', false);
+    $('#bookingDivWithID').data('bookingID', bookingInfo.event.id);
+    $('#bookingModal').modal('show');
+    //formatting the date object into a string
+    let startTimeStr = dayjs(bookingInfo.event.start).format();
+    let endTimeStr = dayjs(bookingInfo.event.end).format();
+    //removing the timezone offset from the string
+    let startTime = startTimeStr.slice(0, -6);
+    let endTime = endTimeStr.slice(0, -6);
+    $('#bookingStartTime-input').val(startTime);
+    $('#bookingEndTime-input').val(endTime);
+    $('#bookingTutor-input').val(bookingInfo.event.title);
+    $('#bookingSubject-input').val(bookingInfo.event.extendedProps.subject);
+    $('#bookingNotes-input').val(bookingInfo.event.extendedProps.description);
+    $('#videoLink-input').val(bookingInfo.event.extendedProps.videoLink);
+}
+
 if (calendarDiv) {
     document.addEventListener('DOMContentLoaded', function () {
         //build calendar and methods
@@ -120,6 +138,7 @@ if (calendarDiv) {
 
             //clicking/clicking & dragging a date/time/period of dates or times fires this
             select: function (info) {
+                sessionStorage.setItem('newEvent', true);
                 $('#bookingModal').modal('show');
                 //removing the timezone offset from the string
                 let startTime = info.startStr.slice(0, -6);
@@ -130,55 +149,17 @@ if (calendarDiv) {
 
             //clicking an event fires this
             eventClick: function (info) {
-                console.log(info);
-                $('#bookingDivWithID').data('bookingID', info.event.id);
-                $('#bookingModal').modal('show');
-                //formatting the date object into a string
-                startTimeStr = dayjs(info.event.start).format();
-                endTimeStr = dayjs(info.event.end).format();
-                //removing the timezone offset from the string
-                let startTime = startTimeStr.slice(0, -6);
-                let endTime = endTimeStr.slice(0, -6);
-                $('#bookingStartTime-input').val(startTime);
-                $('#bookingEndTime-input').val(endTime);
-                $('#bookingTutor-input').val(info.event.title);
-                $('#bookingSubject-input').val(info.event.extendedProps.subject);
-                $('#bookingNotes-input').val(info.event.extendedProps.description);
-                $('#videoLink-input').val(info.event.extendedProps.videoLink);
+                updateBooking(info);
             },
 
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
-                var updatedEvent = {
-                    tutor: info.event.tutor,
-                    notes: info.event.notes,
-                    startTime: info.event.start,
-                    endTime: info.event.end,
-                    id: info.event.id,
-                };
-
-                $.ajax({
-                    url: `/api/bookings/${updatedEvent.id}`,
-                    type: 'PUT',
-                    data: updatedEvent,
-                });
+                updateBooking(info);
             },
 
             //when an existing event is dragged and dropped
             eventDrop: function (info) {
-                var updatedEvent = {
-                    tutor: info.event.tutor,
-                    notes: info.event.notes,
-                    startTime: info.event.start,
-                    endTime: info.event.end,
-                    id: info.event.id,
-                };
-
-                $.ajax({
-                    url: `/api/bookings/${updatedEvent.id}`,
-                    type: 'PUT',
-                    data: updatedEvent,
-                });
+                updateBooking(info);
             },
         });
         //------------------------------------------------

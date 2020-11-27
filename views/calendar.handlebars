@@ -151,6 +151,9 @@
             videoLink: $('#videoLink-input').val().trim()
         };
 
+        console.log('Session storage - newEvent: ' + sessionStorage.getItem('newEvent'));
+        // if it's a new event POST it
+        if (sessionStorage.getItem('newEvent') === true) {
         $.post('/api/booking', bookingData)
             .then(() => {
                 // go back to the members page
@@ -161,11 +164,31 @@
             .fail((err) => {
                 console.log(err);
             });
+        } 
+        else {
+            // it's an existing event so need to update via PUT
+            bookingData.id = $('#bookingDivWithID').data('bookingID');
 
+            console.log(bookingData.id);
+
+            $.ajax('/api/bookings', {
+                type: "PUT",
+                data: bookingData
+                })
+                .done(() => {
+                    // go back to the members page
+                    window.location.replace('/members');
+                    clearForm();
+                    // If there's an error, log the error
+                })
+                .fail((err) => {
+                    console.log(err);
+                });
+        }
     });
 
     $("#bookingDeleteBtn").on("click", function (event) {
-        debugger;
+        //debugger;
         event.preventDefault();
         // get the booking ID
         const id = $('#bookingDivWithID').data('bookingID');
