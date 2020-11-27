@@ -93,6 +93,8 @@ if (calendarDiv) {
                             //convert the time object returned by the database into something the calendar can recognise
                             let fixedStart = new Date(event.startTime);
                             let fixedEnd = new Date(event.endTime);
+                            //different event save properties for student and for tutors
+                            //(obviously a tutor won't need their own name to show as the title of the booking)
                             if (userType === 'student') {
                                 return {
                                     id: event.id,
@@ -179,44 +181,48 @@ if (calendarDiv) {
                 startTimeStr = dayjs(info.event.start).format();
                 endTimeStr = dayjs(info.event.end).format();
                 let bookingData = {
-                    //info.event is the new event details after being dragged, while info.oldEvent are the original details
-                    id: info.oldEvent.id,
-                    start: startTimeStr,
-                    end: endTimeStr,
-                    notes: info.oldEvent.extendedProps.description,
-                    videoLink: info.oldEvent.extendedProps.videoLink,
-                    StudentId: info.oldEvent.extendedProps.StudentId,
-                    TutorId: info.oldEvent.extendedProps.tutorId,
+                    id: info.event.id,
+                    startTime: startTimeStr,
+                    endTime: endTimeStr,
+                    notes: info.event.extendedProps.description,
+                    videoLink: info.event.extendedProps.videoLink,
+                    StudentId: info.event.extendedProps.StudentId,
+                    TutorId: info.event.extendedProps.tutorId,
+                    SubjectId: info.event.extendedProps.subjectId,
                 };
 
                 $.ajax({
                     url: `/api/bookings/`,
                     type: 'PUT',
                     data: bookingData,
+                    // this reverses the event date/time change if the ajax call fails
+                    error: info.revert(),
                 });
             },
 
             //when an existing event is dragged and dropped
             eventDrop: function (info) {
-                console.log(info);
                 // get the details and convert from calendar event to database event format
                 startTimeStr = dayjs(info.event.start).format();
                 endTimeStr = dayjs(info.event.end).format();
                 let bookingData = {
                     //info.event is the new event details after being dragged, while info.oldEvent are the original details
                     id: info.oldEvent.id,
-                    start: startTimeStr,
-                    end: endTimeStr,
+                    startTime: startTimeStr,
+                    endTime: endTimeStr,
                     notes: info.oldEvent.extendedProps.description,
                     videoLink: info.oldEvent.extendedProps.videoLink,
                     StudentId: info.oldEvent.extendedProps.StudentId,
                     TutorId: info.oldEvent.extendedProps.tutorId,
+                    SubjectId: info.oldEvent.extendedProps.subjectId,
                 };
 
                 $.ajax({
                     url: `/api/bookings/`,
                     type: 'PUT',
                     data: bookingData,
+                    // this reverses the event date/time change if the ajax call fails
+                    error: info.revert(),
                 });
             },
         });
