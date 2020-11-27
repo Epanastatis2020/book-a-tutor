@@ -34,7 +34,14 @@ $(document).ready(() => {
     // Otherwise we log any errors
     function signUpUser(user) {
         $.post('/api/signup', user)
-            .then(() => {
+            .then((newUser) => {
+                // save the curent user details to session storage
+                sessionStorage.setItem('userId', newUser.id);
+                sessionStorage.setItem('userEmail', newUser.email);
+                sessionStorage.setItem('userFirstName', newUser.firstName);
+                sessionStorage.setItem('userLastName', newUser.lastName);
+                sessionStorage.setItem('userType', newUser.userType);
+
                 window.location.replace('/members');
                 // If there's an error, handle it by throwing up a bootstrap alert
             })
