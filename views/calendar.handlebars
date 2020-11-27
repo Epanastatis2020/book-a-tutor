@@ -1,20 +1,30 @@
 {{!-- This is the original header --}}
-<header class="header">
-    <nav class=" navbar-light topnav">
-        <h1 class="bat-title">Book-A-Tutor
-            <div class="dropdown">
-                <button id="logoutButton" class="dropbtn">LOGOUT</button>
-                <div class="dropdown-content">
-                    <a class="btnLogout" style="padding: 0%;" href="#">Logout</a>
+<div class="bg_img">
+    <header class="header">
+        <nav class="navbar-light fixed-top topnav">
+            <div>
+                <img src="./img/shutterstock_402326182_brain.png" class="logo-image">
+                <div class="dropdown dropdown-toggle">
+                    <button id="logoutButton" class="dropbtn"></button>
+                    <div class="dropdown-content">
+                        <a class="btnLogout" style="padding: 0%;" href="#">Logout</a>
+                    </div>
                 </div>
             </div>
-        </h1>
-        <hr>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<div class="container">
-    <div id='calendarDiv'></div>
+
+    {{!-- Calendar container --}}
+    <div class="calendar-container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div id='calendarDiv'></div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
 </div>
 <!-- Make a BOOKING Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
