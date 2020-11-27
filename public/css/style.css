@@ -24,6 +24,7 @@ body {
 
 .topnav {
     background-color: #0f2034;
+    height: 80px;
 }
 
 .topnav a {
@@ -201,6 +202,7 @@ body {
 /* contact section */
 .row1 {
     display: flex;
+    margin-bottom: 40px;
 }
 
 .contact-card {
@@ -237,7 +239,7 @@ img {
 /* Background image */
 .bg_img {
     background: url('https://user-images.githubusercontent.com/67722377/100095242-4d3d9200-2eae-11eb-8643-99edf170bd82.jpg')
-        no-repeat center top fixed;
+        center top fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -276,12 +278,12 @@ img {
     margin: 2px;
     cursor: pointer;
 } */
-
+/* 
 .btn-primary:hover {
     background-color: brown;
     border: 2px solid rgb(204, 113, 128);
     font-weight: bold;
-}
+} */
 
 .footer-sticky {
     background: rgba(84, 138, 160, 0.5);
@@ -313,6 +315,7 @@ img {
     padding: 20px;
     font-family: 'Roboto', Arial, 'Helvetica Neue', Helvetica, sans-serif;
     font-size: smaller;
+    border-radius: 10px;
 }
 
 /* logo for members page */
