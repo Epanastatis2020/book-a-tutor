@@ -121,8 +121,6 @@ if (calendarDiv) {
                 $('#bookingEndTime-input').val(endTime);
             },
 
-            // Wed Nov 25 2020 10:00:00 GMT+1100 (Australian Eastern Daylight Time)
-
             //clicking an event fires this
             eventClick: function (info) {
                 $('#bookingModal').modal('show');
@@ -137,6 +135,7 @@ if (calendarDiv) {
                 $('#bookingNotes-input').val(info.event.extendedProps.description);
                 $('#videoLink-input').val(info.event.extendedProps.videoLink);
             },
+
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
                 var updatedEvent = {
