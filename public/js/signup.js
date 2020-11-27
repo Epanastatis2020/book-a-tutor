@@ -1,19 +1,19 @@
 $(document).ready(() => {
     // Getting references to our form and input
-    const $signUpForm = $('form.signup');
+    const $signUpForm = $('form.signupModal');
     const $firstNameInput = $('input#firstname-input');
     const $lastNameInput = $('input#lastname-input');
-    const $emailInput = $('input#email-input');
-    const $passwordInput = $('input#password-input');
+    const $emailInput = $('input#signupEmail-input');
+    const $passwordInput = $('input#signupPassword-input');
     const $userTypeInput = $('select#userType-input');
 
     // When the signup button is clicked, we validate the email and password are not blank
     $signUpForm.on('submit', (event) => {
         event.preventDefault();
-        console.log(`UserType: ${$userTypeInput.val()}`);
+
         const userData = {
             firstName: $firstNameInput.val().trim(),
-            lastName: $lastNameInput.cal().trim(),
+            lastName: $lastNameInput.val().trim(),
             email: $emailInput.val().trim(),
             password: $passwordInput.val().trim(),
             userType: $userTypeInput.val(),

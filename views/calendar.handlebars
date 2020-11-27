@@ -17,20 +17,17 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
 <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Make a Booking</h5>
+        <h5 class="modal-title" id="booking_modal">Make a Booking</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form>
+        <form class="eventModal">
             <div class="form-group">
             <label for="exampleFormControlSelectSubjects">Select Subject</label>
             <select class="form-control" id="bookingSubject-input">
             <option value="" disabled selected hidden>Please choose...</option>
-            {{#each subjects}}
-                <option value="{{this.id}}"> {{this.name}}</option>
-            {{/each}}
             </select>
             </div>
             <div class="form-group">
@@ -54,16 +51,40 @@
                 <label for="exampleFormControlTextarea1">Notes:</label>
                 <textarea class="form-control" id="bookingNotes-input" rows="3"></textarea>
             </div>
-        </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="bookingSaveBtn">Save changes</button>
+            </div>
+            </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="bookingSaveBtn">Save changes</button>
     </div>
 </div>
 
 {{!-- functionality for the booking modal --}}
 <script type="text/javascript">
+    $('#bookingModal').on('shown.bs.modal', function (event) {
+        event.preventDefault();
+
+        // clear the subject select
+        $('#bookingSubject-input').empty();
+
+        // Send the GET request to get all the subjects
+        $.ajax('/api/subjects', {
+            type: "GET",
+            success: function (response) {
+
+                // fill the subject select with the subjects
+                $.each(response, function (i, item) {
+                    $('#bookingSubject-input').append($('<option>', {
+                        value: item.id,
+                        text: `${item.name}`
+                    }));
+                });
+            }
+        });
+    });
+
     $("#bookingSubject-input").on("change", function (event) {
         event.preventDefault();
 
@@ -99,7 +120,8 @@
             // startTime: start.toISOString().slice(0, 19).replace('T', ' '),
             startTime: $('#bookingStartTime-input').val(),//.slice(0, 19).replace('T', ' '),
             endTime: $('#bookingEndTime-input').val(),//.slice(0, 19).replace('T', ' '),
-            notes: $('#bookingNotes-input').val().trim()
+            notes: $('#bookingNotes-input').val().trim(),
+            videoLink: $('#videoLink-input').val().trim()
         };
 
         $.post('/api/booking', bookingData)
