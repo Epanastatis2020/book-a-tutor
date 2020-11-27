@@ -2,11 +2,17 @@
 <header class="header">
     <nav class=" navbar-light topnav">
     <h1 class="bat-title">Book-A-Tutor
-        <button class="navbar-brand btnLogout" style="float:right; margin: 20PX;">Logout</button>
+ <div class="dropdown">
+    <button class="dropbtn">{{firstName}}</button>
+       <div class="dropdown-content">
+          <a class="btnLogout"  style="padding: 0%;" href="#">Logout</a>
+       </div>
+ </div>
     </h1>
     <hr>
     </nav>
 </header>
+
 <div class="container">
     <div id='calendarDiv'></div>
 </div>
