@@ -84,8 +84,8 @@ if (calendarDiv) {
                             } else {
                                 title = event.student.firstName + ' ' + event.student.lastName;
                             }
-                            let fixedStart = event.startTime.slice(0, -5);
-                            let fixedEnd = event.endTime.slice(0, -5);
+                            let fixedStart = new Date(event.startTime);
+                            let fixedEnd = new Date(event.endTime);
                             return {
                                 id: event.id,
                                 title: title,
