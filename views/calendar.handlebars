@@ -80,7 +80,18 @@
 {{!-- functionality for the booking modal --}}
 <script type="text/javascript">
 
-    $('#bookingModal').on('shown.bs.modal', function (event) {
+     function clearForm() {
+        $('#bookingStartTime-input').val('');
+        $('#bookingEndTime-input').val('');
+        $('#bookingNotes-input').val('');
+        $('#videoLink-input').val('');
+    }
+
+   $('#bookingModal').on('hide.bs.modal', function (event) {
+       clearForm();
+   });
+
+   $('#bookingModal').on('shown.bs.modal', function (event) {
         event.preventDefault();
 
         // clear the subject select input of all subjects except the first one (Please select..)
@@ -145,6 +156,7 @@
                 // go back to the members page
                 window.location.replace('/members');
                 // If there's an error, log the error
+                clearForm();
             })
             .fail((err) => {
                 console.log(err);
@@ -165,6 +177,7 @@
             type: "DELETE",
             success: function() {
                 window.location.replace('/members');
+                clearForm();
             }
         });
     });
