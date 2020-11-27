@@ -121,6 +121,7 @@ if (calendarDiv) {
             //clicking/clicking & dragging a date/time/period of dates or times fires this
             select: function (info) {
                 $('#bookingModal').modal('show');
+                //removing the timezone offset from the string
                 let startTime = info.startStr.slice(0, -6);
                 let endTime = info.endStr.slice(0, -6);
                 $('#bookingStartTime-input').val(startTime);
@@ -130,10 +131,12 @@ if (calendarDiv) {
             //clicking an event fires this
             eventClick: function (info) {
                 $('#bookingModal').modal('show');
-                let startTimeJSON = JSON.stringify(info.event.start);
-                let startTime = startTimeJSON.slice(1, -6);
-                let endTimeJSON = JSON.stringify(info.event.end);
-                let endTime = endTimeJSON.slice(1, -6);
+                //formatting the date object into a string
+                startTimeStr = dayjs(info.event.start).format();
+                endTimeStr = dayjs(info.event.end).format();
+                //removing the timezone offset from the string
+                let startTime = startTimeStr.slice(0, -6);
+                let endTime = endTimeStr.slice(0, -6);
                 $('#bookingStartTime-input').val(startTime);
                 $('#bookingEndTime-input').val(endTime);
                 $('#bookingTutor-input').val(info.event.title);
