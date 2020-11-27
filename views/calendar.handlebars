@@ -66,8 +66,8 @@
     $('#bookingModal').on('shown.bs.modal', function (event) {
         event.preventDefault();
 
-        // clear the subject select
-        $('#bookingSubject-input').empty();
+        // clear the subject select input of all subjects except the first one (Please select..)
+        $('#bookingSubject-input').find('option').not(':first').remove();
 
         // Send the GET request to get all the subjects
         $.ajax('/api/subjects', {
@@ -78,7 +78,7 @@
                 $.each(response, function (i, item) {
                     $('#bookingSubject-input').append($('<option>', {
                         value: item.id,
-                        text: `${item.name}`
+                        text: item.name
                     }));
                 });
             }
@@ -117,9 +117,8 @@
             StudentId: sessionStorage.getItem('userId'),
             TutorId: $('#bookingTutor-input').val(),
             SubjectId: $('#bookingSubject-input').val(),
-            // startTime: start.toISOString().slice(0, 19).replace('T', ' '),
-            startTime: $('#bookingStartTime-input').val(),//.slice(0, 19).replace('T', ' '),
-            endTime: $('#bookingEndTime-input').val(),//.slice(0, 19).replace('T', ' '),
+            startTime: $('#bookingStartTime-input').val(),
+            endTime: $('#bookingEndTime-input').val(),
             notes: $('#bookingNotes-input').val().trim(),
             videoLink: $('#videoLink-input').val().trim()
         };
