@@ -24,6 +24,7 @@ body {
 
 .topnav {
     background-color: #0f2034;
+    height: 80px;
 }
 
 .topnav a {
@@ -277,12 +278,12 @@ img {
     margin: 2px;
     cursor: pointer;
 } */
-
+/* 
 .btn-primary:hover {
     background-color: brown;
     border: 2px solid rgb(204, 113, 128);
     font-weight: bold;
-}
+} */
 
 .footer-sticky {
     background: rgba(84, 138, 160, 0.5);
@@ -314,6 +315,7 @@ img {
     padding: 20px;
     font-family: 'Roboto', Arial, 'Helvetica Neue', Helvetica, sans-serif;
     font-size: smaller;
+    border-radius: 10px;
 }
 
 /* logo for members page */
