@@ -157,7 +157,7 @@ module.exports = function (app) {
             startTime: req.body.startTime,
             endTime: req.body.endTime,
             notes: req.body.notes,
-            videoLink: req.body.notes,
+            videoLink: req.body.videoLink,
             StudentId: req.body.StudentId,
             TutorId: req.body.TutorId,
             SubjectId: req.body.SubjectId,
