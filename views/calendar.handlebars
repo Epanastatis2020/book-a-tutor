@@ -1,28 +1,20 @@
 {{!-- This is the original header --}}
-<div class="bg_img">
-    <header class="header">
-        <nav class="navbar-light topnav">
-            <h1 class="bat-title">Book-A-Tutor
-                <div class="dropdown">
-                    <button class="dropbtn">LOGOUT</button>
-                    <div class="dropdown-content">
-                        <a class="btnLogout" style="padding: 0%;" href="#">Logout</a>
-                    </div>
+<header class="header">
+    <nav class=" navbar-light topnav">
+        <h1 class="bat-title">Book-A-Tutor
+            <div class="dropdown">
+                <button id="logoutButton" class="dropbtn">LOGOUT</button>
+                <div class="dropdown-content">
+                    <a class="btnLogout" style="padding: 0%;" href="#">Logout</a>
                 </div>
-            </h1>
-            <hr>
-        </nav>
-    </header>
-    {{!-- Calendar container --}}
-    <div class="calendar-container">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div id='calendarDiv'></div>
             </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
+        </h1>
+        <hr>
+    </nav>
+</header>
+
+<div class="container">
+    <div id='calendarDiv'></div>
 </div>
 <!-- Make a BOOKING Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -63,7 +55,6 @@
 
 {{!-- functionality for the booking modal --}}
 <script type="text/javascript">
-
 
     $('#bookingModal').on('shown.bs.modal', function (event) {
         event.preventDefault();
