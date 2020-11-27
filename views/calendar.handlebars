@@ -35,44 +35,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form class="eventModal">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelectSubjects">Select Subject</label>
-                        <select class="form-control" id="bookingSubject-input">
-                            <option value="" disabled selected hidden>Please choose...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Tutor</label>
-                        <select class="form-control" id="bookingTutor-input">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="bookingStartTime">Start Time</label>
-                        <input type="datetime-local" id="bookingStartTime-input" name="bookingStartTime">
-                    </div>
-                    <div class="form-group">
-                        <label for="bookingEndTime">End Time</label>
-                        <input type="datetime-local" id="bookingEndTime-input" name="bookingEndTime">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Link to your online tutoring sessions with
-                            {{firstName}}{{lastName}}</label>
-                        <textarea class="form-control" id="videoLink-input" rows="1"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Notes:</label>
-                        <textarea class="form-control" id="bookingNotes-input" rows="3"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="bookingSaveBtn">Save changes</button>
-                    </div>
-                </form>
+            <div class="form-group">
+                <label for="bookingStartTime">Start Time</label>
+                <input type="datetime-local" id="bookingStartTime-input" name="bookingStartTime">
             </div>
+            <div class="form-group">
+                <label for="bookingEndTime">End Time</label>
+                <input type="datetime-local" id="bookingEndTime-input" name="bookingEndTime">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Link to your online tutoring session</label>
+                <textarea class="form-control" id="videoLink-input" rows="1"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Notes:</label>
+                <textarea class="form-control" id="bookingNotes-input" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="bookingSaveBtn">Save changes</button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 
 {{!-- functionality for the booking modal --}}
