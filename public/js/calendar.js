@@ -2,6 +2,12 @@
 /* eslint-disable jquery/no-ajax */
 /* eslint-disable jquery/no-ready */
 
+// Getting references to the logout button element
+const $logoutButton = $('#logoutButton');
+
+//Storing the user's email
+const userEmailRef = sessionStorage.getItem('userEmail');
+
 //------------------------------------------------
 // Initialising the calendar
 //------------------------------------------------
@@ -176,6 +182,7 @@ if (calendarDiv) {
 
         $(window).on('load', function () {
             calendar.render();
+            $logoutButton.html(userEmailRef);
         });
     });
 }
