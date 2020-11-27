@@ -3,7 +3,7 @@
     <nav class=" navbar-light topnav">
     <h1 class="bat-title">Book-A-Tutor
  <div class="dropdown">
-    <button class="dropbtn">{{firstName}}</button>
+    <button class="dropbtn">LOGOUT</button>
        <div class="dropdown-content">
           <a class="btnLogout"  style="padding: 0%;" href="#">Logout</a>
        </div>
@@ -69,6 +69,8 @@
 
 {{!-- functionality for the booking modal --}}
 <script type="text/javascript">
+
+
     $('#bookingModal').on('shown.bs.modal', function (event) {
         event.preventDefault();
 
@@ -141,5 +143,6 @@
             });
 
     });
+
 </script>
 
