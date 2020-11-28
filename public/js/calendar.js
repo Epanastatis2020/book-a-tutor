@@ -162,14 +162,18 @@ if (calendarDiv) {
             //------------------------------------------------
 
             //clicking/clicking & dragging a date/time/period of dates or times fires this
+            //only available to Students as Tutors shouldn't be creating requests for tutor sessions
             select: function (info) {
-                sessionStorage.setItem('newEvent', true);
-                $('#bookingModal').modal('show');
-                //removing the timezone offset from the string
-                let startTime = info.startStr.slice(0, -6);
-                let endTime = info.endStr.slice(0, -6);
-                $('#bookingStartTime-input').val(startTime);
-                $('#bookingEndTime-input').val(endTime);
+
+                if (userType === 'student') {
+                    $('#bookingModal').modal('show');
+                    //removing the timezone offset from the string
+                    let startTime = info.startStr.slice(0, -6);
+                    let endTime = info.endStr.slice(0, -6);
+                    $('#bookingStartTime-input').val(startTime);
+                    $('#bookingEndTime-input').val(endTime);
+                }
+
             },
 
             //clicking an event fires this
@@ -179,7 +183,7 @@ if (calendarDiv) {
 
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
-                updateBooking(info);
+                updateBooking(info); 
             },
 
             //when an existing event is dragged and dropped
