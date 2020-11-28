@@ -1,6 +1,6 @@
 {{!-- the Nav bar at the top --}}
 <header class="header">
-  <nav class="navbar navbar-light fixed-top topnav">
+  <div class="navbar navbar-light fixed-top topnav">
     <div>
       <a class="active" href="#main-s">Home</a>
       {{!-- button for signup modal --}}
@@ -8,15 +8,15 @@
       {{!-- Contact page --}}
       <a href="#contact-s" style="color:white;">Contact</a>
     </div>
-    <div class="login-container ml-auto">
+    <div class="login-container">
       <form class="login">
-        <button class="login-container btn" type="submit">Login</button>
         <input type="email" class="login-container" placeholder="Enter email" name="email" id="loginEmail-input"
           aria-describedby="emailHelp">
         <input type="password" class="login-container" placeholder="Password" name="psw" id="loginPassword-input">
+        <button type="submit">Login</button>
       </form>
     </div>
-  </nav>
+  </div>
   {{!-- small JavaScript code for arrows to work smoothly --}}
   <script>
     $(document).ready(function () {
@@ -103,11 +103,11 @@
 </section>
 {{!-- for contact  --}}
 <section id="contact-s" style="background-color: #0f2034;">
-  <div id="first-section"></div>
-  <div class="row1">
+  <div class="container-fluid" id="first-section"></div>
+  <div class="row contact-all">
     <div class="col-md-3">
       <div class="contact-card">
-        <img src="./img/Con-A.png" alt="Team Member: Con">
+        <img src="./img/Con-A.png" alt="Team Member: Con" class="img-fluid">
         <p class="contact-name">Con Angelakis</p>
         <a
           href="mailto:con.angelakis@gmail.com? subject=email & cc=elijam1608@gmail.com,sareronald@hotmail.com,gallagherluke@yahoo.com">
@@ -121,7 +121,7 @@
     </div>
     <div class="col-md-3">
       <div class="contact-card">
-        <img src="./img/Luke.png" alt="Team Member: Luke">
+        <img src="./img/Luke.png" alt="Team Member: Luke" class="img-fluid">
         <p class="contact-name">Luke Gallagher</p>
         <a
           href="mailto:gallagherluke@yahoo.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com">
@@ -136,7 +136,7 @@
 
     <div class="col-md-3">
       <div class="contact-card">
-        <img src="./img/Sarah.jpg" alt="Team Member: Sarah">
+        <img src="./img/Sarah.jpg" alt="Team Member: Sarah" class="img-fluid">
         <p class="contact-name">Sarah Ronald </p>
         <a
           href="mailto:sareronald@hotmail.com? subject=email & cc=elijam1608@gmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com">
@@ -150,7 +150,7 @@
     </div>
     <div class="col-md-3">
       <div class="contact-card">
-        <img src="./img/Elahe.png" alt="Team Member: Elahe">
+        <img src="./img/Elahe.png" alt="Team Member: Elahe" class="img-fluid">
         <p class="contact-name">Elahe Jamshidi Araghi</p>
         <a
           href="mailto:elijam1608@gmail.com? subject=email & cc=sareronald@hotmail.com,gallagherluke@yahoo.com,con.angelakis@gmail.com">
@@ -172,7 +172,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Signup to Book A Tutor</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Signup to Book-A-Tutor as a Student/Tutor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
