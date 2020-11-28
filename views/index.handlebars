@@ -203,7 +203,7 @@
               <option value="tutor">Tutor</option>
             </select>
           </div>
-          <div class="form-group">
+          <div class="form-group" id="selectionTonly" style="display:none">
             <label for="exampleFormControlSelectSubjects">Select Tutor Subjects</label>
             <select multiple class="form-control" id="tutorSubjects-input" disabled></select>
             <p class="multi-select">Hold down the Ctrl (Windows) or Command (Mac) button to select multiple options.</p>
@@ -254,4 +254,11 @@
     $('#tutorSubjects-input').attr('disabled', userType === 'student');
   });
 
+  $("#userType-input").change(function() {
+  if ($(this).val() == "tutor") {
+    $('#selectionTonly').show();
+  } else {
+    $('#selectionTonly').hide();
+  }
+  });
 </script>
