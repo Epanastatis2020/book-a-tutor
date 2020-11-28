@@ -20,6 +20,24 @@ const UserID = sessionStorage.getItem('userId');
 // only want to do it if we are showing the calendar page
 var calendarDiv = document.getElementById('calendarDiv');
 
+function updateBooking(bookingInfo) {
+    sessionStorage.setItem('newEvent', false);
+    $('#bookingDivWithID').data('bookingID', bookingInfo.event.id);
+    $('#bookingModal').modal('show');
+    //formatting the date object into a string
+    let startTimeStr = dayjs(bookingInfo.event.start).format();
+    let endTimeStr = dayjs(bookingInfo.event.end).format();
+    //removing the timezone offset from the string
+    let startTime = startTimeStr.slice(0, -6);
+    let endTime = endTimeStr.slice(0, -6);
+    $('#bookingStartTime-input').val(startTime);
+    $('#bookingEndTime-input').val(endTime);
+    $('#bookingTutor-input').val(bookingInfo.event.title);
+    $('#bookingSubject-input').val(bookingInfo.event.extendedProps.subject);
+    $('#bookingNotes-input').val(bookingInfo.event.extendedProps.description);
+    $('#videoLink-input').val(bookingInfo.event.extendedProps.videoLink);
+}
+
 if (calendarDiv) {
     document.addEventListener('DOMContentLoaded', function () {
         //build calendar and methods
@@ -146,6 +164,7 @@ if (calendarDiv) {
             //clicking/clicking & dragging a date/time/period of dates or times fires this
             //only available to Students as Tutors shouldn't be creating requests for tutor sessions
             select: function (info) {
+
                 if (userType === 'student') {
                     $('#bookingModal').modal('show');
                     //removing the timezone offset from the string
@@ -154,76 +173,22 @@ if (calendarDiv) {
                     $('#bookingStartTime-input').val(startTime);
                     $('#bookingEndTime-input').val(endTime);
                 }
+
             },
 
             //clicking an event fires this
             eventClick: function (info) {
-                console.log(info);
-                $('#bookingDivWithID').data('bookingID', info.event.id);
-                $('#bookingModal').modal('show');
-                //formatting the date object into a string
-                startTimeStr = dayjs(info.event.start).format();
-                endTimeStr = dayjs(info.event.end).format();
-                //removing the timezone offset from the string
-                let startTime = startTimeStr.slice(0, -6);
-                let endTime = endTimeStr.slice(0, -6);
-                $('#bookingStartTime-input').val(startTime);
-                $('#bookingEndTime-input').val(endTime);
-                $('#bookingTutor-input').val(info.event.title);
-                $('#bookingSubject-input').val(info.event.extendedProps.subject);
-                $('#bookingNotes-input').val(info.event.extendedProps.description);
-                $('#videoLink-input').val(info.event.extendedProps.videoLink);
+                updateBooking(info);
             },
 
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
-                // get the details and convert from calendar event to database event format
-                startTimeStr = dayjs(info.event.start).format();
-                endTimeStr = dayjs(info.event.end).format();
-                let bookingData = {
-                    id: info.event.id,
-                    startTime: startTimeStr,
-                    endTime: endTimeStr,
-                    notes: info.event.extendedProps.description,
-                    videoLink: info.event.extendedProps.videoLink,
-                    StudentId: info.event.extendedProps.StudentId,
-                    TutorId: info.event.extendedProps.tutorId,
-                    SubjectId: info.event.extendedProps.subjectId,
-                };
-
-                $.ajax({
-                    url: `/api/bookings/`,
-                    type: 'PUT',
-                    data: bookingData,
-                    // this reverses the event date/time change if the ajax call fails
-                    error: info.revert(),
-                });
+                updateBooking(info); 
             },
 
             //when an existing event is dragged and dropped
             eventDrop: function (info) {
-                // get the details and convert from calendar event to database event format
-                startTimeStr = dayjs(info.event.start).format();
-                endTimeStr = dayjs(info.event.end).format();
-                let bookingData = {
-                    //info.event is the new event details after being dragged, while info.oldEvent are the original details
-                    id: info.oldEvent.id,
-                    startTime: startTimeStr,
-                    endTime: endTimeStr,
-                    notes: info.oldEvent.extendedProps.description,
-                    videoLink: info.oldEvent.extendedProps.videoLink,
-                    StudentId: info.oldEvent.extendedProps.StudentId,
-                    TutorId: info.oldEvent.extendedProps.tutorId,
-                    SubjectId: info.oldEvent.extendedProps.subjectId,
-                };
-
-                $.ajax({
-                    url: `/api/bookings/`,
-                    type: 'PUT',
-                    data: bookingData,
-                    // this reverses the event date/time change if the ajax call fails
-                    error: info.revert(),
-                });
+                updateBooking(info);
             },
         });
         //------------------------------------------------
