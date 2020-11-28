@@ -24,7 +24,6 @@ body {
 
 .topnav {
     background-color: #0f2034;
-    height: 80px;
 }
 
 .topnav a {
@@ -35,6 +34,7 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    background-color: #0f2034;
 }
 
 .topnav a:hover {
@@ -48,38 +48,42 @@ body {
 }
 
 .topnav .login-container {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    /* margin-top: 5px;
+    margin-bottom: 5px; */
+    float: right;
 }
 
+/* style the input field inside the navbar */
 .topnav input[type='text'] {
     padding: 6px;
     margin-top: 8px;
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
     font-size: 17px;
     border: none;
     width: 120px;
 }
 
-/* Login Button */
+/* Style the button inside the input container - Login Button */
 .topnav .login-container button {
     float: right;
     padding: 3px 10px;
-    margin-right: 6px;
-    margin-left: 3px;
+    /* margin-top: 8px; */
+    /* margin-right: 6px; */
+    /* margin-left: 3px; */
     background-color: #0e2033;
     color: white;
     font-size: 1em;
     border: none;
     cursor: pointer;
-    height: 30px;
+    /* height: 30px; */
     border-radius: 0;
 }
 
 .topnav .login-container button:hover {
-    background-color: #2b4359;
+    background: #2b4359;
 }
 
+/* Add responsiveness - On small screens, display the navbar vertically instead of horizontally */
 @media screen and (max-width: 600px) {
     .topnav .login-container {
         float: none;
@@ -93,6 +97,7 @@ body {
         width: 100%;
         margin: 0;
         padding: 14px;
+        background-color: #0e2033;
     }
     .topnav input[type='text'] {
         border: 1px solid #ccc;
