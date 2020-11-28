@@ -8,6 +8,12 @@ const $logoutButton = $('#logoutButton');
 //Storing the user's email
 const userEmailRef = sessionStorage.getItem('userEmail');
 
+//Storing the user's userType
+const userType = sessionStorage.getItem('userType');
+
+//Storing the user's Id
+const UserID = sessionStorage.getItem('userId');
+
 //------------------------------------------------
 // Initialising the calendar
 //------------------------------------------------
@@ -102,25 +108,44 @@ if (calendarDiv) {
                     type: 'GET',
                     success: function (res) {
                         let mappedEvents = res.map(function (event) {
-                            let title;
-                            if (sessionStorage.getItem('userType') === 'student') {
-                                title = event.tutor.firstName + ' ' + event.tutor.lastName;
-                            } else {
-                                title = event.student.firstName + ' ' + event.student.lastName;
-                            }
+                            //convert the time object returned by the database into something the calendar can recognise
                             let fixedStart = new Date(event.startTime);
                             let fixedEnd = new Date(event.endTime);
-                            return {
-                                id: event.id,
-                                title: title,
-                                start: fixedStart,
-                                end: fixedEnd,
-                                extendedProps: {
-                                    subject: event.Subject,
-                                    videoLink: event.videoLink,
-                                },
-                                description: event.notes,
-                            };
+                            //different event save properties for student and for tutors
+                            //(obviously a tutor won't need their own name to show as the title of the booking)
+                            if (userType === 'student') {
+                                return {
+                                    id: event.id,
+                                    title: event.tutor.firstName + ' ' + event.tutor.lastName,
+                                    start: fixedStart,
+                                    end: fixedEnd,
+                                    extendedProps: {
+                                        subjectName: event.Subject.name,
+                                        subjectId: event.Subject.id,
+                                        videoLink: event.videoLink,
+                                        tutorId: event.tutor.id,
+                                        //when the user is a student, StudentId and userId should be the same
+                                        StudentId: event.StudentId,
+                                        userId: UserID,
+                                    },
+                                    description: event.notes,
+                                };
+                            } else {
+                                return {
+                                    id: event.id,
+                                    title: event.student.firstName + ' ' + event.student.lastName,
+                                    start: fixedStart,
+                                    end: fixedEnd,
+                                    extendedProps: {
+                                        subjectName: event.Subject.name,
+                                        subjectId: event.Subject.id,
+                                        videoLink: event.videoLink,
+                                        StudentId: event.StudentId,
+                                        userId: UserID,
+                                    },
+                                    description: event.notes,
+                                };
+                            }
                         });
                         successCallback(mappedEvents);
                     },
