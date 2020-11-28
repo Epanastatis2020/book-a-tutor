@@ -1,6 +1,6 @@
 {{!-- the Nav bar at the top --}}
 <header class="header">
-  <nav class="navbar navbar-light fixed-top topnav">
+  <div class="navbar navbar-light fixed-top topnav">
     <div>
       <a class="active" href="#main-s">Home</a>
       {{!-- button for signup modal --}}
@@ -10,13 +10,13 @@
     </div>
     <div class="login-container">
       <form class="login">
-        <button class="login-container btn" type="submit">Login</button>
         <input type="email" class="login-container" placeholder="Enter email" name="email" id="loginEmail-input"
           aria-describedby="emailHelp">
         <input type="password" class="login-container" placeholder="Password" name="psw" id="loginPassword-input">
+        <button type="submit">Login</button>
       </form>
     </div>
-  </nav>
+  </div>
   {{!-- small JavaScript code for arrows to work smoothly --}}
   <script>
     $(document).ready(function () {
@@ -172,7 +172,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Signup to Book A Tutor</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Signup to Book-A-Tutor as a Student/Tutor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
