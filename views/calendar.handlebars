@@ -80,7 +80,9 @@
 {{!-- functionality for the booking modal --}}
 <script type="text/javascript">
 
-     function clearForm() {
+    function clearForm() {
+        $('#bookingTutor-input').val(),
+        $('#bookingSubject-input').val(),
         $('#bookingStartTime-input').val('');
         $('#bookingEndTime-input').val('');
         $('#bookingNotes-input').val('');
@@ -93,6 +95,11 @@
 
    $('#bookingModal').on('shown.bs.modal', function (event) {
         event.preventDefault();
+
+        // only show the delete button if we are editing an existing booking
+        if (sessionStorage.getItem('newEvent') === 'true') {
+            $("#bookingDeleteBtn").hide();
+        }
 
         // clear the subject select input of all subjects except the first one (Please select..)
         $('#bookingSubject-input').find('option').not(':first').remove();
@@ -153,17 +160,17 @@
 
         console.log('Session storage - newEvent: ' + sessionStorage.getItem('newEvent'));
         // if it's a new event POST it
-        if (sessionStorage.getItem('newEvent') === true) {
-        $.post('/api/booking', bookingData)
-            .then(() => {
-                // go back to the members page
-                window.location.replace('/members');
-                // If there's an error, log the error
-                clearForm();
-            })
-            .fail((err) => {
-                console.log(err);
-            });
+        if (sessionStorage.getItem('newEvent') === 'true') {
+            $.post('/api/booking', bookingData)
+                .then(() => {
+                    // go back to the members page
+                    window.location.replace('/members');
+                    // If there's an error, log the error
+                    clearForm();
+                })
+                .fail((err) => {
+                    console.log(err);
+                });
         } 
         else {
             // it's an existing event so need to update via PUT
