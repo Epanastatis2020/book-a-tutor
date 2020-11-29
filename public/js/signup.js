@@ -6,6 +6,7 @@ $(document).ready(() => {
     const $emailInput = $('input#signupEmail-input');
     const $passwordInput = $('input#signupPassword-input');
     const $userTypeInput = $('select#userType-input');
+    const $tutorSubjectsInput = $('select#tutorSubjects-input');
 
     // When the signup button is clicked, we validate the email and password are not blank
     $signUpForm.on('submit', (event) => {
@@ -42,6 +43,14 @@ $(document).ready(() => {
                 sessionStorage.setItem('userLastName', newUser.lastName);
                 sessionStorage.setItem('userType', newUser.userType);
 
+                // user created so enter the tutor subjects if necessary
+                if (newUser.userType === 'tutor') {
+                    let selectedSubjects = $tutorSubjectsInput.val();
+
+                    $.post(`/api/tutorsubjects/${newUser.id}`, { 'tutorSubjects[]': selectedSubjects }
+                    )
+                    .catch(handleLoginErr);
+                }
                 window.location.replace('/members');
                 // If there's an error, handle it by throwing up a bootstrap alert
             })
