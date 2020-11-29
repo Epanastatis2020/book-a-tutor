@@ -81,8 +81,8 @@
 <script type="text/javascript">
 
     function clearForm() {
-        $('#bookingTutor-input').val(),
-        $('#bookingSubject-input').val(),
+        $('#bookingTutor-input').find('option').remove();
+        $('#bookingSubject-input').find('option').remove();
         $('#bookingStartTime-input').val('');
         $('#bookingEndTime-input').val('');
         $('#bookingNotes-input').val('');
@@ -100,22 +100,32 @@
         if (sessionStorage.getItem('newEvent') === 'true') {
             $("#bookingDeleteBtn").hide();
         }
-
-        // clear the subject select input of all subjects except the first one (Please select..)
-        $('#bookingSubject-input').find('option').not(':first').remove();
+        else {
+            $("#bookingDeleteBtn").show(); 
+        }
 
         // Send the GET request to get all the subjects
         $.ajax('/api/subjects', {
             type: "GET",
             success: function (response) {
 
+                const $bookingSubjectInput = $('#bookingSubject-input');
                 // fill the subject select with the subjects
+                $bookingSubjectInput.append('<option value="" disabled selected hidden>Please choose...</option>');
                 $.each(response, function (i, item) {
-                    $('#bookingSubject-input').append($('<option>', {
+                    $bookingSubjectInput.append($('<option>', {
                         value: item.id,
                         text: item.name
                     }));
                 });
+
+                // and set the subject based on the event subject, but only if doing existing events
+                if (sessionStorage.getItem('newEvent') === 'false') {
+                    let subjectId = sessionStorage.getItem('subjectId');
+                    $bookingSubjectInput.val(subjectId);
+                    // and fire the event so the tutor input is loaded and set
+                    $bookingSubjectInput.trigger("change");
+                }
             }
         });
     });
@@ -140,6 +150,12 @@
                         text: `${item.User.firstName} ${item.User.lastName}`
                     }));
                 });
+
+                // and select the tutor based on the event tutor, but only if doing existing events
+                if (sessionStorage.getItem('newEvent') === 'false') {
+                    let tutorId = sessionStorage.getItem('tutorId');
+                    $('#bookingTutor-input').val(tutorId);
+                }
             }
         });
     });
@@ -158,7 +174,6 @@
             videoLink: $('#videoLink-input').val().trim()
         };
 
-        console.log('Session storage - newEvent: ' + sessionStorage.getItem('newEvent'));
         // if it's a new event POST it
         if (sessionStorage.getItem('newEvent') === 'true') {
             $.post('/api/booking', bookingData)

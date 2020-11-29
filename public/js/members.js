@@ -14,6 +14,8 @@ $(document).ready(() => {
             sessionStorage.removeItem('userLastName');
             sessionStorage.removeItem('userType');
             sessionStorage.removeItem('newEvent');
+            sessionStorage.removeItem('subjectId');
+            sessionStorage.removeItem('tutorId');
 
             // and go to main page
             window.location.replace('/');
