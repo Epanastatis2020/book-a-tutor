@@ -21,7 +21,13 @@ const UserID = sessionStorage.getItem('userId');
 var calendarDiv = document.getElementById('calendarDiv');
 
 function updateBooking(bookingInfo) {
+    // update sessino storage for use across files
     sessionStorage.setItem('newEvent', false);
+    sessionStorage.setItem('subjectId', bookingInfo.event.extendedProps.subjectId);
+    if (userType === 'student') {
+        sessionStorage.setItem('tutorId', bookingInfo.event.extendedProps.tutorId);
+    }
+
     $('#bookingDivWithID').data('bookingID', bookingInfo.event.id);
     $('#bookingModal').modal('show');
     //formatting the date object into a string
@@ -32,8 +38,6 @@ function updateBooking(bookingInfo) {
     let endTime = endTimeStr.slice(0, -6);
     $('#bookingStartTime-input').val(startTime);
     $('#bookingEndTime-input').val(endTime);
-    $('#bookingTutor-input').val(bookingInfo.event.title);
-    $('#bookingSubject-input').val(bookingInfo.event.extendedProps.subject);
     $('#bookingNotes-input').val(bookingInfo.event.extendedProps.description);
     $('#videoLink-input').val(bookingInfo.event.extendedProps.videoLink);
 }
@@ -166,6 +170,7 @@ if (calendarDiv) {
             select: function (info) {
 
                 if (userType === 'student') {
+                    sessionStorage.setItem('newEvent', true);
                     $('#bookingModal').modal('show');
                     //removing the timezone offset from the string
                     let startTime = info.startStr.slice(0, -6);
