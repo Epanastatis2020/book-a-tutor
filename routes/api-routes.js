@@ -200,14 +200,16 @@ module.exports = function (app) {
 
     //   ***************************** TUTOR_SUBJECTS ***************************************** //
     // Route for adding a subject that a tutor tutors
-    app.post('/api/tutorsubject', (req, res) => {
-        console.log(`Creating tutorsubject: ${JSON.stringify(req.body)}`);
-        db.TutorSubject.create({
-            SubjectId: req.body.SubjectId,
-            UserId: req.body.UserId,
-        })
-            .then((dbTutorSubject) => {
-                res.status(200).json(dbTutorSubject);
+    app.post('/api/tutorsubjects/:id', (req, res) => {
+
+        let tutorSubjects = req.body.tutorSubjects;
+        let queryArray = tutorSubjects.map((val) => {
+            return { UserId: parseInt(req.params.id), SubjectId: parseInt(val) };
+        });
+
+        db.TutorSubject.bulkCreate(queryArray)
+            .then((dbTutorSubjects) => {
+                res.status(200).json(dbTutorSubjects);
             })
             .catch((err) => {
                 res.status(401).json(err);
