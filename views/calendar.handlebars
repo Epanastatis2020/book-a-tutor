@@ -45,7 +45,7 @@
             <option value="" disabled selected hidden>Please choose...</option>
             </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="tutorSelector" style="display:none">
                 <label for="exampleFormControlSelect1">Tutor</label>
                 <select class="form-control" id="bookingTutor-input">
                 </select>
@@ -226,6 +226,11 @@
             }
         });
     });
+
+    // hiding the tutor input if a tutor has opened the booking modal
+    if (sessionStorage.getItem('userType') === 'student') {
+        $('#tutorSelector').show();
+    };
 
 </script>
 
