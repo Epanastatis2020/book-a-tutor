@@ -81,7 +81,7 @@ This app uses a MVC design pattern where Node and MySQL are used to query and ro
 <br>
 
 ### **Video of the app in use** 
-* JawsDB add-on provides a fully functional MySQL Database server for use with the Heroku application. A recording of the app's functionality can be viewed [here]()*.
+* JawsDB add-on provides a fully functional MySQL Database server for use with the Heroku application. A recording of the app's functionality can be viewed [here](https://drive.google.com/file/d/1gdZeu9rKitNSN3iJY5VuC29HTMGa_8vq/view?usp=sharing)*.
 <br>
 
 ### **Tools**
