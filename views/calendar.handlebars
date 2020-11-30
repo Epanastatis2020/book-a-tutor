@@ -163,49 +163,53 @@
     $("#bookingSaveBtn").on("click", function (event) {
         event.preventDefault();
 
-        // get the details and save the booking
-        const bookingData = {
-            StudentId: sessionStorage.getItem('userId'),
-            TutorId: $('#bookingTutor-input').val(),
-            SubjectId: $('#bookingSubject-input').val(),
-            startTime: $('#bookingStartTime-input').val(),
-            endTime: $('#bookingEndTime-input').val(),
-            notes: $('#bookingNotes-input').val().trim(),
-            videoLink: $('#videoLink-input').val().trim()
-        };
+        if ( (Date.now() < new Date($('#bookingStartTime-input').val())) &&
+             (new Date($('#bookingStartTime-input').val()) < new Date($('#bookingEndTime-input').val())) ) {
+            // get the details and save the booking
+            const bookingData = {
+                StudentId: sessionStorage.getItem('userId'),
+                TutorId: $('#bookingTutor-input').val(),
+                SubjectId: $('#bookingSubject-input').val(),
+                startTime: $('#bookingStartTime-input').val(),
+                endTime: $('#bookingEndTime-input').val(),
+                notes: $('#bookingNotes-input').val().trim(),
+                videoLink: $('#videoLink-input').val().trim()
+            };
 
-        // if it's a new event POST it
-        if (sessionStorage.getItem('newEvent') === 'true') {
-            $.post('/api/booking', bookingData)
-                .then(() => {
-                    // go back to the members page
-                    window.location.replace('/members');
-                    // If there's an error, log the error
-                    clearForm();
-                })
-                .fail((err) => {
-                    console.log(err);
-                });
-        } 
+            // if it's a new event POST it
+            if (sessionStorage.getItem('newEvent') === 'true') {
+                $.post('/api/booking', bookingData)
+                    .then(() => {
+                        // go back to the members page
+                        window.location.replace('/members');
+                        // If there's an error, log the error
+                        clearForm();
+                    })
+                    .fail((err) => {
+                        console.log(err);
+                    });
+            } 
+            else {
+                // it's an existing event so need to update via PUT
+                bookingData.id = $('#bookingDivWithID').data('bookingID');
+
+                $.ajax('/api/bookings', {
+                    type: "PUT",
+                    data: bookingData
+                    })
+                    .done(() => {
+                        // go back to the members page
+                        window.location.replace('/members');
+                        clearForm();
+                        // If there's an error, log the error
+                    })
+                    .fail((err) => {
+                        console.log(err);
+                    });
+            }
+        }
         else {
-            // it's an existing event so need to update via PUT
-            bookingData.id = $('#bookingDivWithID').data('bookingID');
-
-            console.log(bookingData.id);
-
-            $.ajax('/api/bookings', {
-                type: "PUT",
-                data: bookingData
-                })
-                .done(() => {
-                    // go back to the members page
-                    window.location.replace('/members');
-                    clearForm();
-                    // If there's an error, log the error
-                })
-                .fail((err) => {
-                    console.log(err);
-                });
+            window.alert('There is an error with the DateTimes. Please check them and try again.');
         }
     });
 
@@ -231,6 +235,9 @@
     $('#bookingSubject-input').attr('disabled', (sessionStorage.getItem('userType') === 'tutor'));
     
 
+    //disabled the Subjects options for tutor
+    $('#bookingSubject-input').attr('disabled', (sessionStorage.getItem('userType') === 'tutor'));
+    
     // hiding the tutor input if a tutor has opened the booking modal
     if (sessionStorage.getItem('userType') === 'student') {
         $('#tutorSelector').show();
