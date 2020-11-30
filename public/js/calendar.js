@@ -25,25 +25,29 @@ function startDatetimeValid(start) {
 }
 
 function updateBooking(bookingInfo) {
-    // update session storage for use across files
-    sessionStorage.setItem('newEvent', false);
-    sessionStorage.setItem('subjectId', bookingInfo.event.extendedProps.subjectId);
-    if (userType === 'student') {
-        sessionStorage.setItem('tutorId', bookingInfo.event.extendedProps.tutorId);
-    }
+    if (startDatetimeValid(bookingInfo.event.start)) {
+        // update session storage for use across files
+        sessionStorage.setItem('newEvent', false);
+        sessionStorage.setItem('subjectId', bookingInfo.event.extendedProps.subjectId);
+        if (userType === 'student') {
+            sessionStorage.setItem('tutorId', bookingInfo.event.extendedProps.tutorId);
+        }
 
-    $('#bookingDivWithID').data('bookingID', bookingInfo.event.id);
-    $('#bookingModal').modal('show');
-    //formatting the date object into a string
-    let startTimeStr = dayjs(bookingInfo.event.start).format();
-    let endTimeStr = dayjs(bookingInfo.event.end).format();
-    //removing the timezone offset from the string
-    let startTime = startTimeStr.slice(0, -6);
-    let endTime = endTimeStr.slice(0, -6);
-    $('#bookingStartTime-input').val(startTime);
-    $('#bookingEndTime-input').val(endTime);
-    $('#bookingNotes-input').val(bookingInfo.event.extendedProps.description);
-    $('#videoLink-input').val(bookingInfo.event.extendedProps.videoLink);
+        $('#bookingDivWithID').data('bookingID', bookingInfo.event.id);
+        $('#bookingModal').modal('show');
+        //formatting the date object into a string
+        let startTimeStr = dayjs(bookingInfo.event.start).format();
+        let endTimeStr = dayjs(bookingInfo.event.end).format();
+        //removing the timezone offset from the string
+        let startTime = startTimeStr.slice(0, -6);
+        let endTime = endTimeStr.slice(0, -6);
+        $('#bookingStartTime-input').val(startTime);
+        $('#bookingEndTime-input').val(endTime);
+        $('#bookingNotes-input').val(bookingInfo.event.extendedProps.description);
+        $('#videoLink-input').val(bookingInfo.event.extendedProps.videoLink);
+    } else {
+        window.alert('cannot modify events that have already passed');
+    }
 }
 
 if (calendarDiv) {
@@ -137,6 +141,7 @@ if (calendarDiv) {
                                         userId: UserID,
                                     },
                                     description: event.notes,
+                                    backgroundColor: startDatetimeValid(event.startTime) ? '#3788d8' : 'lightslategray',
                                 };
                             } else {
                                 return {
@@ -152,6 +157,7 @@ if (calendarDiv) {
                                         userId: UserID,
                                     },
                                     description: event.notes,
+                                    backgroundColor: startDatetimeValid(event.startTime) ? 'blue' : '#2c3e50',
                                 };
                             }
                         });
@@ -172,7 +178,6 @@ if (calendarDiv) {
             //clicking/clicking & dragging a date/time/period of dates or times fires this
             //only available to Students as Tutors shouldn't be creating requests for tutor sessions
             select: function (info) {
-
                 if (userType === 'student') {
                     if (startDatetimeValid(info.startStr)) {
                         sessionStorage.setItem('newEvent', true);
@@ -182,12 +187,10 @@ if (calendarDiv) {
                         let endTime = info.endStr.slice(0, -6);
                         $('#bookingStartTime-input').val(startTime);
                         $('#bookingEndTime-input').val(endTime);
-                        }
-                    else {
+                    } else {
                         window.alert('Bookings can only be made in the future.');
                     }
-                }
-                else {
+                } else {
                     window.alert('Only students can create new bookings.');
                 }
             },
