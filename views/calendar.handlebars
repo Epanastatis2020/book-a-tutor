@@ -97,7 +97,7 @@
         event.preventDefault();
 
         // only show the delete button if we are editing an existing booking
-        if (sessionStorage.getItem('newEvent') === 'true') {
+        if ((sessionStorage.getItem('newEvent') === 'true') || (sessionStorage.getItem('userType') === 'tutor')) {
             $("#bookingDeleteBtn").hide();
         }
         else {
@@ -234,10 +234,9 @@
     //disabled the Subjects options for tutor
     $('#bookingSubject-input').attr('disabled', (sessionStorage.getItem('userType') === 'tutor'));
     
-    // hiding the tutor input if a tutor has opened the booking modal
+    // hiding the tutor input and delete if a tutor has opened the booking modal
     if (sessionStorage.getItem('userType') === 'student') {
         $('#tutorSelector').show();
-        $('#bookingDeleteBtn').show();        
     };
 
 </script>
