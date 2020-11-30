@@ -20,8 +20,12 @@ const UserID = sessionStorage.getItem('userId');
 // only want to do it if we are showing the calendar page
 var calendarDiv = document.getElementById('calendarDiv');
 
+function startDatetimeValid(start) {
+    return Date.now() < new Date(start);
+}
+
 function updateBooking(bookingInfo) {
-    // update sessino storage for use across files
+    // update session storage for use across files
     sessionStorage.setItem('newEvent', false);
     sessionStorage.setItem('subjectId', bookingInfo.event.extendedProps.subjectId);
     if (userType === 'student') {
@@ -170,15 +174,22 @@ if (calendarDiv) {
             select: function (info) {
 
                 if (userType === 'student') {
-                    sessionStorage.setItem('newEvent', true);
-                    $('#bookingModal').modal('show');
-                    //removing the timezone offset from the string
-                    let startTime = info.startStr.slice(0, -6);
-                    let endTime = info.endStr.slice(0, -6);
-                    $('#bookingStartTime-input').val(startTime);
-                    $('#bookingEndTime-input').val(endTime);
+                    if (startDatetimeValid(info.startStr)) {
+                        sessionStorage.setItem('newEvent', true);
+                        $('#bookingModal').modal('show');
+                        //removing the timezone offset from the string
+                        let startTime = info.startStr.slice(0, -6);
+                        let endTime = info.endStr.slice(0, -6);
+                        $('#bookingStartTime-input').val(startTime);
+                        $('#bookingEndTime-input').val(endTime);
+                        }
+                    else {
+                        window.alert('Bookings can only be made in the future.');
+                    }
                 }
-
+                else {
+                    window.alert('Only students can create new bookings.');
+                }
             },
 
             //clicking an event fires this
@@ -188,12 +199,16 @@ if (calendarDiv) {
 
             //function handling when the event is resized (ie, time changed)
             eventResize: function (info) {
-                updateBooking(info); 
+                updateBooking(info);
             },
 
             //when an existing event is dragged and dropped
             eventDrop: function (info) {
                 updateBooking(info);
+            },
+
+            eventAllow: function (dropInfo, draggedEvent) {
+                return startDatetimeValid(dropInfo.start);
             },
         });
         //------------------------------------------------
