@@ -157,7 +157,7 @@ if (calendarDiv) {
                                         userId: UserID,
                                     },
                                     description: event.notes,
-                                    backgroundColor: startDatetimeValid(event.startTime) ? 'blue' : '#2c3e50',
+                                    backgroundColor: startDatetimeValid(event.startTime) ? '#3788d8' : 'lightslategray',
                                 };
                             }
                         });
