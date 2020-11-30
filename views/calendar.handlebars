@@ -67,7 +67,7 @@
                 <textarea class="form-control" id="bookingNotes-input" rows="3"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger mr-auto" id="bookingDeleteBtn" data-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-danger mr-auto" id="bookingDeleteBtn" data-dismiss="modal" style="display:none">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="bookingSaveBtn">Save changes</button>
             </div>
@@ -231,16 +231,13 @@
         });
     });
     
-    //disabled the Subjests options for tutor
-    $('#bookingSubject-input').attr('disabled', (sessionStorage.getItem('userType') === 'tutor'));
-    
-
     //disabled the Subjects options for tutor
     $('#bookingSubject-input').attr('disabled', (sessionStorage.getItem('userType') === 'tutor'));
     
     // hiding the tutor input if a tutor has opened the booking modal
     if (sessionStorage.getItem('userType') === 'student') {
         $('#tutorSelector').show();
+        $('#bookingDeleteBtn').show();        
     };
 
 </script>
