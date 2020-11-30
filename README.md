@@ -14,25 +14,28 @@ Project 2: designing and building your first full-stack web application
 * [Acknowledgements](#Acknowledgements)
 * [Issues](#Issues)
 * [Authors](#Authors)
+<br>
 
 ## Project Overview
-This app allows teachers and tutors to book sessions with students and keep track of their commitments and learning. Students can log in and view any sessions that have been scheduled with them.
+This app allows **Students** to book sessions with tutors within a specific subject area for online academic support. It allows **Tutors** to view their bookings and keep track of their commitments and the learning of their students. Students can log in and view any sessions they have scheduled on a particular day/across a week.
+<br>
 
 ## User Story
-### Tutor User Story:
+### TUTOR User Story:
 AS An educator
 I WANT to be able to manage tutoring sessions with students
-SO THAT I am better able to manage my time and learning outcomes
+SO THAT I am better able to manage my time and student learning outcomes
 
-### Student User Story
+### STUDENT User Story
 AS A student
-I WANT to see when specific tutors are available
 I WANT to be able to filter available tutors by subject
-SO THAT I can book a tutoring session
+SO THAT I can book a tutoring session at a specific date/time for academic support
+<br>
 
 ## Link to the App
 Please visit the <a href="https://github.com/Epanastatis2020/book-a-tutor.git">GitHub repository</a> for a copy of the code for this project and application.<br>
 Please visit the <a href="https://book-a-tutor.herokuapp.com/">Book-A-Tutor </a>application, hosted on Heroku.
+<br>
 
 ## About this project
 ### **How the app works**
@@ -42,26 +45,26 @@ This project uses front end and back end design to create an online tutor bookin
 * email address
 * password
 * User Type (Student or Tutor): if Tutor is chosen then the Select Tutor Subjects field is displayed to allow the tutor to chose which subjects they are qualified to teach/tutor.
-###
-Once the user has completed the signup form, they can login to the calender page, specific to their user type. This page allows:
+<br>
+Once the user has completed the signup form, they can login to the calendar page, specific to their user type. This page allows:
 * Tutors to see when their Tutoring services are booked
-* Students to book a Tutor and view their bookings on a rendered calendar. To make a booking, the user needs to click on the calender at the desired date and time - which will activate a modal that allows them to choose:
+* Students can book a Tutor and view their bookings on a rendered calendar. To make a booking, the user needs to click on the calendar at the desired date and time - which will activate a modal that allows them to choose:
 * a subject
 * a tutor (Tutor names are generated according to their chosen subject area)
 * dynamically generated date and time
 * a link to the online tutoring session
 * any notes from the student to the teacher about the problem
-###
+<br>
 Once saved, the tutoring session booking can be clicked on within the calendar to reveal the relevant information (so that it can be edited)
 
 Lastly, the user can logout of the app and be returned to the homepage.
-
+<br>
 ### **How the app was built** 
 This app uses MySQL, Node, Express, Handlebars and Sequelize render a CRUD (Create, Read, Update, Delete) application which has the ability to:
 ###
 POST:
 * add a new user to the database, identifying them as a Tutor or Student
-* add a new booking to the calender (storing the information in the database)
+* add a new booking to the calendar (storing the information in the database)
 ###
 GET: 
 * getting the information from the database to verify a user's email and password as valid
@@ -69,19 +72,24 @@ GET:
 ###
 PUT:
 * edit a booking and save the changes to the database 
+* drag and drop the tutoring session to a different date and time on the calendar
 ###
 DELETE:
 * discard of a booking for real-time updates of Tutoring Sessions.  
 ###
 This app uses a MVC design pattern where Node and MySQL are used to query and route data in the app. Handlebars is used to generate the HTML using Bootstrap, Google Fonts and Font Awesome to create the aesthetics.
+<br>
 
-### **How the app was deployed on Heroku** 
-
+### **Video of the app in use** 
+* JawsDB add-on provides a fully functional MySQL Database server for use with the Heroku application. A recording of the app's functionality can be viewed [here]()*.
+<br>
 
 ### **Tools**
 * [Visual Studio Code](https://code.visualstudio.com/) - The editor of choice
 * [GitHub](https://github.com/) to share the code
+* [Travis CI](https://travis-ci.org/) to test the code
 * [Heroku](https://www.heroku.com/) to host the site
+
 * **Backend Technology:**
   * [MySQL](https://www.npmjs.com/package/mysql)
   * [Express](https://www.npmjs.com/package/express)
@@ -94,6 +102,7 @@ This app uses a MVC design pattern where Node and MySQL are used to query and ro
   * [bycrypt.js](https://www.npmjs.com/package/bcryptjs)
   * [Sequelize](https://www.npmjs.com/package/sequelize)
   * [eslint](https://www.npmjs.com/package/eslint)configurable linter tool
+  
 * **Frontend Technology:**
   * HTML
   * CSS
@@ -102,25 +111,30 @@ This app uses a MVC design pattern where Node and MySQL are used to query and ro
   * [jQuery](https://jquery.com/)
   * [Handlebars](https://www.npmjs.com/package/express-handlebars)
   * [day.js](https://day.js.org/en/)
-  * [fullcalender.io](https://fullcalendar.io/)
+  * [fullcalendar.io](https://fullcalendar.io/) 
 <br>
 
-## Files
-This application consists of the following files:
-| File                | Relative Path          |
-| ------------------- | ---------------------- |
-|server.js | server.js |
-| schema.sql | db/schema.sql |
-| seedData.sql | db/seedData.sql |
-
-
-## Screenshots
+## Screenshots and quick Walkthrough
 
 #### **Walthrough of application**
+![walkthrough-bookatutor](https://user-images.githubusercontent.com/67722377/100559829-06192c00-3308-11eb-8880-247c81c2ece2.gif)
 
+To see a more indepth video of the app please click [here](#Video-of-the-app-in-use) to go up to **Video of the app in use** above.
 
 #### **Screenshot of application**
+#### **Landing Page** 
+![landing-page](https://user-images.githubusercontent.com/67722377/100535366-635f9f80-326c-11eb-8e50-4d7b30ead217.png)
 
+#### Information about Book-A-Tutor (underneath the landing page video)
+![info](https://user-images.githubusercontent.com/67722377/100535490-9191af00-326d-11eb-903f-80d33326831d.png)
+
+#### Contacts 
+![contact](https://user-images.githubusercontent.com/67722377/100535510-c0a82080-326d-11eb-8c4c-a33fbccc45f2.png)
+
+#### **Members Page** (with Calendar view)
+The Members page looks similar for Student and Tutor - however their functionality works differently, which can be seen a little more clearly in the walkthrough video provided above. This is a student view, where the student has two current bookings.
+![members-page](https://user-images.githubusercontent.com/67722377/100541016-2f4ca480-3295-11eb-8c42-40572fd60ea4.png)
+<br>
 
 ## Licence
 - [MIT License](https://opensource.org/licenses/MIT)
@@ -128,7 +142,8 @@ This application consists of the following files:
 
 ## Acknowledgements
 * The video background was sourced from [Videezy](https://www.videezy.com/).
-* [Font Awesome](https://fontawesome.com/) has also been used for the GitHub icons in the contacts page
+* [Font Awesome](https://fontawesome.com/) has also been used for the GitHub icons in the contacts page.
+* [Shutterstock](https://www.shutterstock.com/home) has been used to source the brain 'logo' at the top of the members page.
 <br>
 
 ## Issues
