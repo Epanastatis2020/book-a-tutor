@@ -226,6 +226,10 @@
             }
         });
     });
+    
+    //disabled the Subjests options for tutor
+    $('#bookingSubject-input').attr('disabled', (sessionStorage.getItem('userType') === 'tutor'));
+    
 
     // hiding the tutor input if a tutor has opened the booking modal
     if (sessionStorage.getItem('userType') === 'student') {
